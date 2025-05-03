@@ -1,5 +1,9 @@
 package TableManaging.Parsers;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import ParameterClasses.User;
 
 /**
@@ -7,25 +11,45 @@ import ParameterClasses.User;
  * see Parser interface for method comments
  */
 public class UserParser implements Parser<User>{
-
+    
     @Override
-    public User parseRow(String csvLine) {
-        String[] csvList = csvLine.split(","); 
-
-        String username = csvList[0];
-        String password = csvList[1];
-        int postsCount = Integer.parseInt(csvList[2]);
-        int followersCount = Integer.parseInt(csvList[3]);
-        int followingCount = Integer.parseInt(csvList[4]);
-        String bio = csvList[5];
-        String profilePicPath = csvList[6];
-
-        return new User(username, password, postsCount, followersCount,followingCount, bio, profilePicPath);
+    public User parseRow(ResultSet rs) throws SQLException {
+        int user_id = rs.getInt("user_id");
+        String username = rs.getString("username");
+        String password = rs.getString("passwrd");
+        String bio = rs.getString("bio");
+        String profilePicPath = rs.getString("profile_pic_path");
+        User user = new User(user_id, username, password, bio, profilePicPath);
+        return user;
     }
 
     @Override
-    public String toCSV(User row) {
-        return row.toString();
+    public void toPreparedStatement(PreparedStatement stmt, User user) throws SQLException {
+        stmt.setString(1, user.getUsername());
+        stmt.setString(2, user.getPassword());
+        stmt.setString(3, user.getBio());
+        stmt.setString(4, user.getProfilePicPath());
     }
 
+    @Override
+    public String getColumns() {
+        return "username, passwrd, bio, profile_pic_path";
+    }
+
+    @Override
+    public String getPlaceholders() {
+        return "?, ?, ?, ?";
+    }
+
+    @Override
+    public String getUniqueIdentifierColumn() {
+        return "user_id";
+    }
+
+    @Override
+    public void setUniqueIdentifier(PreparedStatement stmt, User user) throws SQLException {
+        stmt.setInt(1, user.getUserID());
+    }
 }
+
+

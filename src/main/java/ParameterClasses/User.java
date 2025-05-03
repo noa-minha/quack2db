@@ -8,31 +8,29 @@ public class User{
 
     private static final String DEFAULT_PROFILE_PIC = "img/logos/DACS.png"; 
 
+    private int userID;
     private String username;
     private String password;
-    private int postsCount;
-    private int followersCount;
-    private int followingCount;
     private String bio;
     private String profilePicPath;
+    // TODO : do we need these?
+    // TODO:change comments
+    // private boolean currentUser;
+    // private DateTime createdAt;
 
 
     /**
      * Constructor for User object
      * @param username
      * @param password
-     * @param postCount
-     * @param followersCount
-     * @param followingCount
      * @param bio
      * @param profilePicPath
      */
-    public User(String username, String password, int postCount, int followersCount, int followingCount, String bio, String profilePicPath){
+
+    public User(int userID, String username, String password, String bio, String profilePicPath){
+        this.userID = userID;
         this.username = username;
         this.password = password;
-        this.postsCount = postCount;
-        this. followersCount = followersCount;
-        this.followingCount = followingCount;
         this.bio = bio;
         if (profilePicPath == null){
             this.profilePicPath = DEFAULT_PROFILE_PIC;
@@ -43,81 +41,16 @@ public class User{
     }
 
     /**
-     * Constructor for new user object (initializes postCount, followersCount & followingCount)
-     * @param username
-     * @param bio
-     * @param password
-     * @param profilePicPath
-     */
-    public User(String username, String bio, String password, String profilePicPath) {
-        this(username, password, 0, 0, 0, bio, profilePicPath);
-    }
-
-
-    /**
      * getters for user attributes
      */
-    public String getUsername() {
-        return username;
-    }
+    public String getUsername() {return username;}
     public String getBio() { return bio; }
-    public void setBio(String bio) {this.bio = bio; }
-    public int getPostsCount() { return postsCount; }
-    public int getFollowersCount() { return followersCount; }
-    public int getFollowingCount() { return followingCount; }
     public String getProfilePicPath() { return profilePicPath; }
-    private String getPassword() { return password; }
+    public String getPassword() { return password; }
+    public int getUserID() {return userID; }
 
 
-    /**
-     * Adds a follower to followerCount
-     * @return the updated User object
-     */
-    public User addfollower() {
-        this.followersCount++;
-        return this;
-    }
-
-    
-    /**
-     * Removes a follower from followerCount
-     * @return the updated User object
-     */
-    public User removeFollower() {
-        this.followersCount--;
-        return this;
-    }
-
-    
-    /**
-     * Adds a following to followingCount
-     * @return the updated User object
-     */
-    public User addfollowing() { 
-        this.followingCount++;
-        return this;
-    }
-
-    
-    /**
-     * Removes a following from followingCount
-     * @return the updated User object
-     */
-    public User removeFollowing() { 
-        this.followingCount--;
-        return this;
-    }
-
-    /**
-     * Adds a post to postCount
-     * @return the updated User object
-     */
-    public User addPost() {
-        this.postsCount++;
-        return this;
-    }
-
-
+    // TODO: is needed? delete?
     /**
      * Checks whether a given password is the user's password
      * @param password
@@ -135,7 +68,7 @@ public class User{
      */
     @Override
     public String toString() {
-        return username + "," + password + "," + postsCount + "," + followersCount + "," + followingCount + "," + bio + "," + profilePicPath;
+        return userID + "," +username + "," + password + "," + bio + "," + profilePicPath;
     }
 
 
@@ -143,9 +76,11 @@ public class User{
     public boolean equals(Object obj) {
         if (obj instanceof User){
             User user = (User) obj;
-            return this.username.equals(user.getUsername());
+            return this.userID == user.getUserID();
         }
         return false;
     }
+
+    //getPrimaryKey? TODO
 
 }

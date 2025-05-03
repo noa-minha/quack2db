@@ -49,7 +49,7 @@ public class DB{
     public static void main(String[] args) {
         System.out.println("hey hey");
         // MySQL database URL
-        String url = "jdbc:mysql://localhost:3306/planinator"; // Replace with your DB details
+        String url = "jdbc:mysql://localhost:3306/quackstagram_db"; // Replace with your DB detail
         String username = "root"; // Your MySQL username
         String password = "1234"; // Your MySQL password
 
@@ -68,6 +68,8 @@ public class DB{
     }
 
 
-
+    public void query(String sql) {
+        System.out.println("Executing: " + sql);
+    }
 
 }
