@@ -1,8 +1,8 @@
 package ParameterClasses;
 
 public class Like {
-    int postID;
-    int userID;
+    private int postID;
+    private int userID;
 
     // Constructor
     public Like(int postID, int userID) {

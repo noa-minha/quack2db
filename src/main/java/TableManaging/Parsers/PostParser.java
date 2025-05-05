@@ -37,12 +37,12 @@ public class PostParser implements Parser<Post>{
 
     @Override
     public String getColumns() {
-        return "post_id, user_id, image_path, caption";
+        return "user_id, image_path, caption";
     }
 
     @Override
     public String getPlaceholders() {
-        return "?, ?, ?, ?";
+        return "?, ?, ?";
     }
 
     @Override
