@@ -3,6 +3,8 @@ package TableManaging.Parsers;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collections;
+import java.util.List;
 
 import ParameterClasses.User;
 
@@ -42,8 +44,8 @@ public class UserParser implements Parser<User>{
     }
 
     @Override
-    public String getUniqueIdentifierColumn() {
-        return "user_id";
+    public List<String> getUniqueIdentifierColumns() {
+        return Collections.singletonList("user_id");
     }
 
     @Override

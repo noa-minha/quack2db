@@ -3,6 +3,7 @@ package TableManaging.Parsers;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Interface used to translate between parameter objects and SQL statements.
@@ -33,9 +34,10 @@ public interface Parser<T> {
     String getPlaceholders();
 
     // Returns the column name for the unique identifier for DELETE
-    String getUniqueIdentifierColumn();
+    public List<String> getUniqueIdentifierColumns();
 
     // Sets the unique identifier in the PreparedStatement for DELETE
     void setUniqueIdentifier(PreparedStatement stmt, T item) throws SQLException;
+
 }
 

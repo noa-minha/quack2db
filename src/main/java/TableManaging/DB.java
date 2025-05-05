@@ -1,6 +1,6 @@
 package TableManaging;
 
-import ParameterClasses.Following;
+import ParameterClasses.Follow;
 import ParameterClasses.Notification;
 import ParameterClasses.Post;
 import ParameterClasses.User;
@@ -39,7 +39,7 @@ public class DB{
     /**
      * Table of Following object that takes data from following.txt
      */
-    public static final TableTXT<Following> FOLLOWING = new TableTXT<>(new File(TABLES_FOLDER, "following.txt"), new FollowParser());
+    public static final TableTXT<Follow> FOLLOWING = new TableTXT<>(new File(TABLES_FOLDER, "following.txt"), new FollowParser());
 
     /**
      * Table of User object that takes data from current_user.txt

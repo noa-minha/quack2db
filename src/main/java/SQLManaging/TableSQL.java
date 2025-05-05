@@ -1,14 +1,18 @@
 package SQLManaging;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import ParameterClasses.User;
 import TableManaging.Parsers.Parser;
+import TableManaging.Parsers.UserParser;
 
 public class TableSQL<T> implements Table<T>{
     private final Connection connection;
@@ -68,13 +72,33 @@ public class TableSQL<T> implements Table<T>{
 
     // Delete rows based on a WHERE condition
     public void delete(T item) {
-        String sql = "DELETE FROM " + tableName + " WHERE " + parser.getUniqueIdentifierColumn() + " = ?";
+        List<String> keys = parser.getUniqueIdentifierColumns();
+        String whereClause = keys.stream()
+            .map(k -> k + " = ?")
+            .collect(Collectors.joining(" AND "));
+
+        String sql = "DELETE FROM " + tableName + " WHERE " + whereClause;
+
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            parser.setUniqueIdentifier(stmt, item);  // Use the parser to set the unique identifier for deletion
-            stmt.executeUpdate();  // Execute the delete statement
+            parser.setUniqueIdentifier(stmt, item); // You define this
+            stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
+    }
+
+    public static void main(String[] args) {
+        Connection conn = DBconnection.getInstance().getConnection();
+        TableSQL<User> userTable = new TableSQL<>(conn, "users", new UserParser());
+
+        // User newUser = new User(0, "alice", "secure123", "Loves cats", "img/users/alice.png");
+        // userTable.insert(newUser);
+
+        List<User> foundUsers = userTable.fetchRows("username = 'alice'");
+        for (User u : foundUsers) {
+            System.out.println("Found: " + u.getUsername());
+        }
+
+        userTable.delete(foundUsers.get(0));
     }
 }

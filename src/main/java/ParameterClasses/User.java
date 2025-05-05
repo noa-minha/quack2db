@@ -63,13 +63,13 @@ public class User{
         return false;
     }
 
-    /**
-     * Returns all relevant information in a csv format
-     */
-    @Override
-    public String toString() {
-        return userID + "," +username + "," + password + "," + bio + "," + profilePicPath;
-    }
+    // /**
+    //  * Returns all relevant information in a csv format
+    //  */
+    // @Override
+    // public String toString() {
+    //     return userID + "," +username + "," + password + "," + bio + "," + profilePicPath;
+    // }
 
 
     @Override
