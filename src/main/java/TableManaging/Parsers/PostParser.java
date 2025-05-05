@@ -1,10 +1,11 @@
 package TableManaging.Parsers;
 
-import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-import Logic.TimeUtil;
-
-import java.time.LocalDateTime;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import ParameterClasses.Post;
 
@@ -14,27 +15,44 @@ import ParameterClasses.Post;
  */
 public class PostParser implements Parser<Post>{
 
+     
     @Override
-    public Post parseRow(String csvLine) {
-        String[] csvList = csvLine.split(",");
+    public Post parseRow(ResultSet rs) throws SQLException {
+        int postID = rs.getInt("post_id");
+        int userID = rs.getInt("user_id");
+        String imgPath = rs.getString("image_path");
+        String caption = rs.getString("caption");
 
-        String username = csvList[0];
-        int id = Integer.parseInt(csvList[1]);
-        String caption = csvList[2];
-        String path = csvList[3];
-        LocalDateTime timePosted = TimeUtil.parseTimestamp(csvList[4]);
-
-        ArrayList<String> likedUsers = new ArrayList<>();
-        for (int i = 5; i < csvList.length; i++) {
-            likedUsers.add(csvList[i]);
-        }
-
-        return new Post(username, id, path, caption, timePosted, likedUsers);
+        Post newPost = new Post(postID, userID, imgPath, caption);
+        return newPost;
     }
 
     @Override
-    public String toCSV(Post row) {
-        return row.toString();
+    public void toPreparedStatement(PreparedStatement stmt, Post post) throws SQLException {
+        stmt.setInt(1, post.getPostID());
+        stmt.setInt(2, post.getUserID());
+        stmt.setString(3, post.getImgPath());
+        stmt.setString(4, post.getCaption());
+    }
+
+    @Override
+    public String getColumns() {
+        return "post_id, user_id, image_path, caption";
+    }
+
+    @Override
+    public String getPlaceholders() {
+        return "?, ?, ?, ?";
+    }
+
+    @Override
+    public List<String> getUniqueIdentifierColumns() {
+        return Collections.singletonList("post_id");
+    }
+
+    @Override
+    public void setUniqueIdentifier(PreparedStatement stmt, Post post) throws SQLException {
+        stmt.setInt(1, post.getPostID());
     }
 
 }
