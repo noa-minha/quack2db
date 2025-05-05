@@ -1,7 +1,6 @@
 package SQLManaging;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -100,5 +99,6 @@ public class TableSQL<T> implements Table<T>{
         }
 
         userTable.delete(foundUsers.get(0));
+
     }
 }
