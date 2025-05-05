@@ -1,9 +1,12 @@
 package TableManaging.Parsers;
 
 
-import Logic.TimeUtil;
 
-import java.time.LocalDateTime;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Collections;
+import java.util.List;
 
 import ParameterClasses.Notification;
 
@@ -14,22 +17,42 @@ import ParameterClasses.Notification;
 public class NotificationParser implements Parser<Notification> {
     
     @Override
-    public Notification parseRow(String csvLine) {
-
-        String[] csvList = csvLine.split(",");
-
-        String recievingUser = csvList[0];
-        String actionUser = csvList[1];
-        String action = csvList[2];
-        LocalDateTime notificationTime = TimeUtil.parseTimestamp(csvList[3]);
-
-        return new Notification(recievingUser, actionUser, action, notificationTime);
+    public Notification parseRow(ResultSet rs) throws SQLException {
+        String username = rs.getString("username");
+        int userID = rs.getInt("user_id");
+        String action = rs.getString("action");
+  
+        Notification n = new Notification(username, userID, action);
+        return n;
     }
 
     @Override
-    public String toCSV(Notification row) {
-        return row.toString();
+    public void toPreparedStatement(PreparedStatement stmt, Notification n) throws SQLException {
+        stmt.setString(1, n.getUsername());
+        stmt.setInt(2, n.getUserID());
+        stmt.setString(3, n.getAction());
     }
 
+    @Override
+    public String getColumns() {
+        return "username, user_id, action";
+    }
+
+    @Override
+    public String getPlaceholders() {
+        return "?, ?, ?";
+    }
+
+    @Override
+    public List<String> getUniqueIdentifierColumns() {
+        return Collections.singletonList("user_id");
+    }
+
+    @Override
+    public void setUniqueIdentifier(PreparedStatement stmt, Notification n) throws SQLException {
+        stmt.setString(1, n.getUsername());
+        stmt.setInt(2, n.getUserID());
+        stmt.setString(3, n.getAction());
+    }
 
 }

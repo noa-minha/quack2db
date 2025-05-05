@@ -1,84 +1,48 @@
 package ParameterClasses;
 
-import java.time.LocalDateTime;
-
-import Logic.LogicClass;
-import Logic.TimeUtil;
 
 /**
  * An object that represents a notification 
  */
 public class Notification {
 
-    private String recievingUser;
-    private String actionUser;
+    private String username;
+    private int userID;
     private String action;
-    private LocalDateTime notificationTime;
 
 
-    /**
-     * Constructor for notification object
-     * @param recievingUser
-     * @param actionUser
-     * @param action
-     * @param notificationTime
-     */
-    public Notification(String recievingUser, String actionUser, String action, LocalDateTime notificationTime) {
-        this.recievingUser = recievingUser;
-        this.actionUser = actionUser;
+    // Constructor
+    public Notification(String username, int userID, String action) {
+        this.username = username;
+        this.userID = userID;
         this.action = action;
-        this.notificationTime = notificationTime;
     }
 
-    /**
-     *  Constructor for new notification object (inputs time posted and initializes the liked users list)
-     * @param recievingUser
-     * @param action
-     */
-    public Notification(String recievingUser, String action){
-        // User actionUser = LogicClass.getCurrUser();
-        this(recievingUser, LogicClass.getCurrUser().getUsername(), action, TimeUtil.getCurrentTimestamp());
+    // Getters
+    public String getUsername() {
+        return username;
     }
 
-    /**
-     * Returns all relevant information in a csv format
-     */
-    @Override
-    public String toString() {
-        return recievingUser + "," + actionUser + "," + action + "," + notificationTime;
-    }
-
-    /**
-     * get methods for all notification attributes
-     */
-    public String getactionUser() {
-        return this.actionUser;
-    }
-
-    public String getRecievingUser() {
-        return this.recievingUser;
-    }
-
-    public LocalDateTime getNotificationTime() {
-        return this.notificationTime;
+    public int getUserID() {
+        return userID;
     }
 
     public String getAction() {
-        return this.action;
+        return action;
     }
-
 
     /**
      * Returns notification information in a readable String format
      */
     public String printNotification() {
-        String formattedDate = TimeUtil.getTimeSince(this.notificationTime);
-
         if (action.equals("like")){
-            return actionUser + " liked your post - " + formattedDate;
+            return username + " liked your post";
         }
         else if(action.equals("follow")){
-            return actionUser + " followed you - " + formattedDate;
+            return username + " followed you";
+        }
+        else if(action.equals("comment")){
+            return username + " commented on your post";
         }
         else{
             return "Unknown notification";
