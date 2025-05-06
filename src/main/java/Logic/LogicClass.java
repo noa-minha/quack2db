@@ -1,11 +1,9 @@
 package Logic;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 
 import ParameterClasses.User;
-import TableManaging.DB;
+import SQLManaging.DBManager;
 
 /**
  * Class to group together logic-handling classes and implement most used methods in those classes
@@ -20,8 +18,8 @@ public abstract class LogicClass {
      * @return the User object of the current user
      */
     public static User getCurrUser(){
-        User currUser = DB.CURR_USER.fetchRows(null).get(0);
-        return currUser;
+        List<User> user = DBManager.userTable.fetchRows("curr_user = " + 1);
+        return user.get(0);
     }
 
     /**

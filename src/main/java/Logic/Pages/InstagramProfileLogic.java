@@ -1,13 +1,16 @@
 package Logic.Pages;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 
 import Logic.LogicClass;
+import ParameterClasses.Follow;
 import ParameterClasses.Following;
 import ParameterClasses.Notification;
 import ParameterClasses.Post;
 import ParameterClasses.User;
+import SQLManaging.DBManager;
 import TableManaging.DB;
 
 
@@ -31,12 +34,9 @@ public class InstagramProfileLogic extends LogicClass{
      */
     public static boolean isCurrUsersFollowing(User profileUser){
         User loggedInUser = getCurrUser();
-        Following followingList = getFollowing(loggedInUser);
-        String profileUsername = profileUser.getUsername();
-        for (String following : followingList.getFollowing()){
-            if (profileUsername.equals(following)){
-                return true;
-            }
+        List<Follow>following = DBManager.followTable.fetchRows("follower_id= "+loggedInUser.getUserID()+" , followee_id= "+profileUser.getUserID());
+        if(following!=null){
+            return true;
         }
         return false;
     }
