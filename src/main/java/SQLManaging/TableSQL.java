@@ -8,10 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import ParameterClasses.User;
 import SQLManaging.Parsers.Parser;
-import SQLManaging.Parsers.UserParser;
 
 // TODO : delete main
 // TODO : make these reaise exception and handle it elsewhere
@@ -59,8 +56,8 @@ public class TableSQL<T> implements Table<T>{
 
     }
 
-    public void update(String setClause, String whereClause) {
-            String sql = "UPDATE " + tableName + " SET " + setClause + " WHERE " + whereClause;
+    public void update(String setClause) {
+            String sql = "UPDATE " + tableName + " SET " + setClause;
             try (PreparedStatement stmt = connection.prepareStatement(sql)) {
                 stmt.executeUpdate(); // no parameters to bind
             } catch (SQLException e) {
@@ -86,18 +83,18 @@ public class TableSQL<T> implements Table<T>{
     }
 
     public static void main(String[] args) {
-        Connection conn = DBconnection.getInstance().getConnection();
-        TableSQL<User> userTable = new TableSQL<>(conn, "users", new UserParser());
+    //     Connection conn = DBManager.init().getConnection();
+    //     TableSQL<User> userTable = new TableSQL<>(conn, "users", new UserParser());
 
-        // User newUser = new User(0, "alice", "secure123", "Loves cats", "img/users/alice.png");
-        // userTable.insert(newUser);
+    //     // User newUser = new User(0, "alice", "secure123", "Loves cats", "img/users/alice.png");
+    //     // userTable.insert(newUser);
 
-        List<User> foundUsers = userTable.fetchRows("username = 'alice'");
-        for (User u : foundUsers) {
-            System.out.println("Found: " + u.getUsername());
-        }
+    //     List<User> foundUsers = userTable.fetchRows("username = 'alice'");
+    //     for (User u : foundUsers) {
+    //         System.out.println("Found: " + u.getUsername());
+    //     }
 
-        userTable.delete(foundUsers.get(0));
+    //     userTable.delete(foundUsers.get(0));
 
     }
 }

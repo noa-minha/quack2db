@@ -6,6 +6,8 @@ import UI.Panels.NavBar;
 import java.awt.*;
 import javax.swing.*;
 
+import SQLManaging.DBManager;
+
 /**
  * The main frame for the Quackstagram application.
  * This class serves as the container for all UI components and manages
@@ -101,6 +103,14 @@ public class BaseFrame extends JFrame {
      * Creates and displays the main application frame.
      */
     public static void main(String[] args) {
+        DBManager.init();
+        System.out.println("init");
+
+        // Update all users curr_user to 0
+        String setClause = "curr_user = 0";
+        DBManager.userTable.update(setClause);
+        System.out.println("update");
+
         SwingUtilities.invokeLater(() -> {
             BaseFrame frame = new BaseFrame();
             frame.setVisible(true);

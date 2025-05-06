@@ -1,6 +1,9 @@
 package Logic.Pages;
+import java.util.List;
+
 import Logic.LogicClass;
 import ParameterClasses.User;
+import SQLManaging.DBManager;
 
 /**
  * Class that handles the logic of SignInUI
@@ -15,21 +18,21 @@ public class SignInLogic extends LogicClass{
      * @throws Exception - in case the user does not exist / in case the password is incorrect
      */
     public static User signInUser(String username, String password) throws Exception{
-        User user = getUser(username);
-        if (!userExists(user)){
-            System.out.println("user does not exist");
-            throw new Exception("User does not exist. Please sign up.");
+        List<User> user = DBManager.userTable.fetchRows("username = " + username);
+
+        if (user.isEmpty()){
+            throw new Exception("User does not exist / username is wrong. Please sign up.");
         }
-        if (!verifyCredentials(user, password)){
-            System.out.println("wrong pass");
+        if (!verifyCredentials(user.get(0), password)){
             throw new Exception("Incorrect password. Please try again.");
         }
 
-        System.out.println(username + " logged in");
-      
-        saveCurrUserInformation(user);
-        return user;
+        String setClause = "curr_user = 1 WHERE username = '" + username + "'";
+        DBManager.userTable.update(setClause);
 
+        System.out.println(username + " logged in");
+
+        return user.get(0);
     }
 
     /**

@@ -1,6 +1,7 @@
 package Logic;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 
 import ParameterClasses.User;
@@ -10,19 +11,9 @@ import TableManaging.DB;
  * Class to group together logic-handling classes and implement most used methods in those classes
  */
 public abstract class LogicClass {
-        
-    /**
-     * Recieves a username and returns the User object of that username
-     * @return A User object if the User exists, null otherwise
-     */
-    public static User getUser(String username){
-        Predicate<User> condition = user -> user.getUsername().equals(username);
-        ArrayList<User> queryResult = DB.USERS.fetchRows(condition); 
-        if(queryResult.size() != 0){
-            return queryResult.get(0);
-        }
-        return null;
-    }
+    
+
+
     
     /**
      * Fetches the current user from DB.CURR_USER 
