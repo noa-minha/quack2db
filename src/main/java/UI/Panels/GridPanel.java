@@ -11,11 +11,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+
 /**
  * This class allows a full display of a certain users post or post display of all users
  */
 public class GridPanel extends JPanel {
-    private ArrayList<Post> posts;
+    private List<Post> posts;
     private JPanel contentPanel;
     private boolean hasPosts;
 

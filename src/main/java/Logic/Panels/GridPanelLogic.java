@@ -1,12 +1,13 @@
 package Logic.Panels;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 
 import Logic.LogicClass;
 import ParameterClasses.Post;
 import ParameterClasses.User;
-import TableManaging.DB;
+import SQLManaging.DBManager;
 
 /**
  * Class that handles the logic of GridPanelUI
@@ -16,13 +17,12 @@ public class GridPanelLogic extends LogicClass{
     /**
      * Recieve all the posts from the given user
      * @param user
-     * @return an ArrayList of the object posts. If user has no posts - returns empty ArrayList
+     * @return a List of the object posts. If user has no posts - returns empty ArrayList
      */
-    public static ArrayList<Post> getUserPosts(User user){
-        Predicate<Post> condition = post -> post.getUsername().equals(user.getUsername());
-        ArrayList<Post> queryResult = DB.POSTS.fetchRows(condition); 
-
-        return queryResult;
+    public static List<Post> getUserPosts(User user){
+        int user_id= user.getUserID();
+        List<Post> posts = DBManager.postTable.fetchRows("user_id = " + user_id);
+        return posts;
     }
 
 

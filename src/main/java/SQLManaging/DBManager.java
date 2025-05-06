@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import ParameterClasses.Post;
 import ParameterClasses.User;
+import SQLManaging.Parsers.PostParser;
 import SQLManaging.Parsers.UserParser;
 
 public class DBManager {
@@ -14,6 +16,7 @@ public class DBManager {
     private static String password = "1234"; // Your MySQL password
 
     public static TableSQL<User> userTable;
+    public static TableSQL<Post> postTable;
 
 
     private static DBManager instance;
@@ -25,6 +28,7 @@ public class DBManager {
             connection = DriverManager.getConnection(url, username, password);
             System.out.println("Connected to the database!");
             userTable = new TableSQL<>(connection, "users", new UserParser());
+            postTable = new TableSQL<>(connection, "posts", new PostParser());
         } catch (SQLException e) {
             e.printStackTrace();
         }
