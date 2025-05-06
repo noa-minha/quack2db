@@ -37,7 +37,7 @@ public class RegularDisplayedPost extends JPanel {
         setBackground(Color.LIGHT_GRAY);
 
         // Load the post image
-        loadPostImage(post.getPath());
+        loadPostImage(post.getImgPath());
 
         // Add mouse listener to detect clicks on the panel (image area)
         addMouseListener(new MouseAdapter() {

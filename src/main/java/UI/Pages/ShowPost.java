@@ -1,6 +1,7 @@
 package UI.Pages;
 
 import Logic.Pages.QuakstagramHomeLogic;
+import SQLManaging.DBManager;
 import UI.Panels.RegularDisplayedPost;
 import UI.BaseFrame;
 import UI.TemplateUI;
@@ -10,6 +11,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
+import java.util.List;
+
 import Logic.LogicClass;
 import Logic.Pages.ShowPostLogic;
 import ParameterClasses.Post;
@@ -238,7 +241,12 @@ public class ShowPost extends TemplateUI {
      */
     private void showUserProfile() {
         BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(this);
-        User profileUser = LogicClass.getUser(post.getUsername());
-        parentFrame.switchPanel(new InstagramProfileUI(profileUser));
+        int user_id = post.getUserID();
+        List<User>profileUser = DBManager.userTable.fetchRows("user_id=" + user_id);
+        try {
+            parentFrame.switchPanel(new InstagramProfileUI(profileUser.get(0)));
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
