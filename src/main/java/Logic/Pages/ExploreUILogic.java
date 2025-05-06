@@ -1,7 +1,11 @@
 package Logic.Pages;
 
 import Logic.LogicClass;
+import ParameterClasses.Post;
 import ParameterClasses.User;
+import SQLManaging.DBManager;
+
+import java.util.List;
 
 /**
  * Class that handles the logic of ExploreUI
@@ -13,10 +17,10 @@ public class ExploreUILogic extends LogicClass {
      * @return the user if found or throws an exception saying a user was not found.
      */
     public static User performSearch(String searchedUsername) throws Exception{
-        User user = getUser(searchedUsername);
-        if (user != null) {
-            return user;
+        List<User> user = DBManager.userTable.fetchRows("user_id = " + searchedUsername);
+        if(user.size() == 0){
+            throw new Exception("No user found.");
         }
-        throw new Exception("No user found.");
+        return user.get(0);
     }
 }
