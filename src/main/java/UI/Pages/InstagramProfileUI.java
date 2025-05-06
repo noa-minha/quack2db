@@ -3,11 +3,11 @@ package UI.Pages;
 import UI.Panels.GridPanel;
 import UI.BaseFrame;
 import UI.TemplateUI;
-import ParameterClasses.User;
 
 import javax.swing.*;
 
 import Logic.Pages.InstagramProfileLogic;
+import ParameterClasses.User;
 
 import java.awt.*;
 

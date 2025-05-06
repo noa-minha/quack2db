@@ -3,8 +3,10 @@ package UI.Pages;
 import UI.TemplateUI;
 import UI.BaseFrame;
 import javax.swing.*;
-import ParameterClasses.User;
+
 import Logic.Pages.SignUpLogic;
+import ParameterClasses.User;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.*;

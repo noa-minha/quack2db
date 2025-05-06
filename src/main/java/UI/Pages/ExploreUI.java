@@ -1,10 +1,11 @@
 package UI.Pages;
 
 import Logic.Pages.ExploreUILogic;
+import ParameterClasses.User;
 import UI.Panels.GridPanel;
 import UI.BaseFrame;
 import UI.TemplateUI;
-import ParameterClasses.User;
+
 import javax.swing.*;
 import java.awt.*;
 

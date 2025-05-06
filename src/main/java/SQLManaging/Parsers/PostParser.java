@@ -1,13 +1,13 @@
-package TableManaging.Parsers;
+package SQLManaging.Parsers;
 
 import java.util.Collections;
 import java.util.List;
 
+import ParameterClasses.Post;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import ParameterClasses.Post;
 
 /**
  * A parser for the Parameter Object Post

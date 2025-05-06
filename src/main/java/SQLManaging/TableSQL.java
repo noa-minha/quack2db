@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import ParameterClasses.User;
-import TableManaging.Parsers.Parser;
-import TableManaging.Parsers.UserParser;
+import SQLManaging.Parsers.Parser;
+import SQLManaging.Parsers.UserParser;
 
 // TODO : delete main
 // TODO : make these reaise exception and handle it elsewhere

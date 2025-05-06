@@ -2,8 +2,6 @@ package UI.Pages;
 
 import Logic.Pages.QuakstagramHomeLogic;
 import UI.Panels.RegularDisplayedPost;
-import ParameterClasses.Post;
-import ParameterClasses.User;
 import UI.BaseFrame;
 import UI.TemplateUI;
 
@@ -14,6 +12,8 @@ import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
 import Logic.LogicClass;
 import Logic.Pages.ShowPostLogic;
+import ParameterClasses.Post;
+import ParameterClasses.User;
 
 /**
  * ShowPost UI is the class that creates the page where you can view a single post with its details.

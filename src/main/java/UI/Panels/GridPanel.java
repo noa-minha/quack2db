@@ -2,9 +2,9 @@ package UI.Panels;
 
 import javax.swing.*;
 import Logic.Panels.GridPanelLogic;
-import UI.Pages.ShowPost;
 import ParameterClasses.Post;
 import ParameterClasses.User;
+import UI.Pages.ShowPost;
 import UI.BaseFrame;
 import java.awt.*;
 import java.awt.event.MouseAdapter;

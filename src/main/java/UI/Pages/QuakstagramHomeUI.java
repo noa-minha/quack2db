@@ -1,6 +1,5 @@
 package UI.Pages;
 
-import ParameterClasses.Post;
 import UI.BaseFrame;
 import UI.Panels.RegularDisplayedPost;
 import UI.TemplateUI;
@@ -8,6 +7,7 @@ import UI.TemplateUI;
 import javax.swing.*;
 
 import Logic.Pages.QuakstagramHomeLogic;
+import ParameterClasses.Post;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

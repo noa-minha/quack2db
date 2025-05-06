@@ -1,4 +1,4 @@
-package TableManaging.Parsers;
+package SQLManaging.Parsers;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

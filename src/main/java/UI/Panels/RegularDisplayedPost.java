@@ -1,11 +1,13 @@
 package UI.Panels;
 
-import ParameterClasses.Post;
 import UI.BaseFrame;
 import UI.Pages.InstagramProfileUI;
 import UI.Pages.ShowPost;
 
 import javax.swing.*;
+
+import ParameterClasses.Post;
+
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
