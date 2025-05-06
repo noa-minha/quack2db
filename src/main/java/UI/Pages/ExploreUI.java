@@ -71,7 +71,7 @@ public class ExploreUI extends TemplateUI {
      * @see ExploreUILogic#performSearch(String)
      * @see InstagramProfileUI
      */
-    private JPanel createMainContentPanel() {
+    private JPanel createMainContentPanel() throws Exception {
         // Create the main content panel with search and image grid
         // Search bar at the top
         JPanel searchPanel = new JPanel(new BorderLayout());

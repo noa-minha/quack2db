@@ -9,7 +9,7 @@ import UI.BaseFrame;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -24,7 +24,7 @@ public class GridPanel extends JPanel {
      * The class is being initialized with the wanted user whos posts are for display
      * @param user - can be a specific user or null - which means all users
      */
-    public GridPanel(User user) {
+    public GridPanel(User user) throws Exception {
         setLayout(new BorderLayout());
 
         // Use FlowLayout with LEFT alignment to ensure items start from top-left

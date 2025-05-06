@@ -59,7 +59,7 @@ public class InstagramProfileUI extends TemplateUI {
      * It adds the main content panel to the UI and ensures proper focus and rendering.
      */
     @Override
-    public void initializeUI() {
+    public void initializeUI() throws Exception {
         // Initialize the image grid
         GridPanel gridPanel = new GridPanel(profileUser);
         add(gridPanel);

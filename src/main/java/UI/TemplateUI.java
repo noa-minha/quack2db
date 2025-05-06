@@ -35,7 +35,7 @@ public abstract class TemplateUI extends JPanel {
      * Abstract method that must be implemented by all subclasses to initialize
      * their specific UI components and layout.
      */
-    protected abstract void initializeUI();
+    protected abstract void initializeUI() throws Exception;
 
     /**
      * Returns the name of this UI panel. Used for identification and navigation purposes.
