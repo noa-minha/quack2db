@@ -1,16 +1,11 @@
 package Logic.Pages;
 
 import Logic.LogicClass;
-import ParameterClasses.Following;
-import ParameterClasses.Notification;
-import ParameterClasses.Post;
-import ParameterClasses.User;
+import ParameterClasses.*;
 import SQLManaging.DBManager;
-import TableManaging.DB;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 
 /**
  * Class that handles the logic of QuackstagramHomeUI
@@ -22,87 +17,70 @@ public class QuakstagramHomeLogic extends LogicClass {
      * updates all relevant tables
      */
     public static void likePost(Post likedPost) {
-        likedPost = likedPost.like(getCurrUser());
-
-        String postUsername = likedPost.getUsername();
-        int postID = likedPost.getID();
-
-        Predicate<Post> condition = post -> {
-            boolean usernameMatches = post.getUsername().equals(postUsername);
-            boolean idMatches = post.getID() == postID;
-            return usernameMatches && idMatches;
-        };
-
-        // updates the post's likes
-        DB.POSTS.updateRows(condition, likedPost);
-
-        // adds a new notification
-        DB.NOTIFICATIONS.insertRow(new Notification(postUsername, "like"), true);
-    }
-
-
-    /**
-     * Recieves a Following object of all the users the current user is following
-     */
-    private static ArrayList<String> getFollowingOfCurrUser() {
         List<User> user = DBManager.userTable.fetchRows("curr_user = " + 1);
         int user_id = user.get(0).getUserID();
-        Predicate<Following> condition = following -> following.getUsername().equals(currUsername);
-        Following followingList = DB.FOLLOWING.fetchRows(condition).get(0);
-        System.out.println("following : " + followingList.getFollowing().size());
-        return followingList.getFollowing();
-    }
 
-    /**
-     * Fetches all the posts of all the users that the current user is following
-     */
-    public static ArrayList<Post> getAllFollowingPosts() {
-        ArrayList<String> followingUsers = getFollowingOfCurrUser();
-        ArrayList<Post> queryResult = DB.POSTS.fetchRows(null);
-        ArrayList<Post> posts = new ArrayList<>();
-
-        for (Post post : queryResult) {
-            for (String username : followingUsers) {
-                if (post.getUsername().equals(username)) {
-                    posts.add(post);
-                    break;
-                }
-            }
+        try {
+            DBManager.likeTable.insert(new Like(likedPost.getPostID(), user_id));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
         }
-
-        System.out.println("post #:" + posts.size());
-        return posts;
-
     }
-
-    /**
-     * Checks if the current user already liked the post
-     * @return true if already liked, false otherwise
-     */
-    public static boolean didUserAlreadyLike(Post post) {
-        return post.didUserLike(getCurrUser());
-    }
-
 
     /**
      * Unlikes a post and updates POSTS table
      */
     public static void unLikePost(Post unlikedPost) {
 
-        unlikedPost = unlikedPost.unLike(getCurrUser());
+        List<User> user = DBManager.userTable.fetchRows("curr_user = " + 1);
+        int user_id = user.get(0).getUserID();
 
-        String postUsername = unlikedPost.getUsername();
-        int postID = unlikedPost.getID();
-
-        Predicate<Post> condition = post -> {
-            boolean usernameMatches = post.getUsername().equals(postUsername);
-            boolean idMatches = post.getID() == postID;
-            return usernameMatches && idMatches;
-        };
-
-        // updates the post's likes
-        DB.POSTS.updateRows(condition, unlikedPost);
+        try {
+            DBManager.likeTable.delete(new Like(unlikedPost.getPostID(), user_id));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
 
     }
 
+    /**
+     * Recieves a Following object of all the users the current user is following
+     */
+    private static List<Follow> getFollowingOfCurrUser() {
+        List<User> user = DBManager.userTable.fetchRows("curr_user = " + 1);
+        int user_id = user.get(0).getUserID();
+        //TODO - MAKE SURE THE ATTRIBUTE NAME IS CORRECT
+        List<Follow> followingList = DBManager.followTable.fetchRows("followerID = " + user_id);
+        return followingList;
+    }
+
+    /**
+     * Fetches all the posts of all the users that the current user is following
+     */
+    public static ArrayList<Post> getAllFollowingPosts() {
+        List<Follow> followingUsers = getFollowingOfCurrUser();
+        ArrayList<Post> posts = new ArrayList<>();
+
+        for (Follow follow : followingUsers) {
+            List<Post> followingPosts = DBManager.postTable.fetchRows("user_id = " + follow.getFolloweeID());
+            posts.addAll(followingPosts);
+        }
+        return posts;
+
+    }
+
+    /**
+     * Checks if the current user already liked the post
+     *
+     * @return true if already liked, false otherwise
+     */
+    public static boolean didUserAlreadyLike(Post post) {
+        List<User> user = DBManager.userTable.fetchRows("curr_user = " + 1);
+        int user_id = user.get(0).getUserID();
+        List<Like> likedPost = DBManager.likeTable.fetchRows("post_id = " + post.getPostID() + ",user_id = " + user_id);
+        if (likedPost == null) return false;
+        else return true;
+    }
 }
