@@ -10,8 +10,8 @@ public class Follow {
 
     /**
      * Constructor for following object
-     * @param username - the current user username
-     * @param followingList - a list of String usernames that the current user is following
+     * @param followerID - the user that follows
+     * @param followeeID - the user who is being followed
      */
     public Follow(int followerID, int followeeID) {
         this.followerID = followerID;

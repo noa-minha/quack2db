@@ -4,9 +4,12 @@ import Logic.LogicClass;
 import ParameterClasses.Following;
 import ParameterClasses.Notification;
 import ParameterClasses.Post;
+import ParameterClasses.User;
+import SQLManaging.DBManager;
 import TableManaging.DB;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 
 /**
@@ -42,7 +45,8 @@ public class QuakstagramHomeLogic extends LogicClass {
      * Recieves a Following object of all the users the current user is following
      */
     private static ArrayList<String> getFollowingOfCurrUser() {
-        String currUsername = getCurrUser().getUsername();
+        List<User> user = DBManager.userTable.fetchRows("curr_user = " + 1);
+        int user_id = user.get(0).getUserID();
         Predicate<Following> condition = following -> following.getUsername().equals(currUsername);
         Following followingList = DB.FOLLOWING.fetchRows(condition).get(0);
         System.out.println("following : " + followingList.getFollowing().size());

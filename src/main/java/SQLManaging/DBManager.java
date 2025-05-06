@@ -4,10 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import ParameterClasses.Post;
-import ParameterClasses.User;
-import SQLManaging.Parsers.PostParser;
-import SQLManaging.Parsers.UserParser;
+import ParameterClasses.*;
+import SQLManaging.Parsers.*;
 
 public class DBManager {
 
@@ -17,6 +15,10 @@ public class DBManager {
 
     public static TableSQL<User> userTable;
     public static TableSQL<Post> postTable;
+    public static TableSQL<Comment> commentTable;
+    public static TableSQL<Like> likeTable;
+    public static TableSQL<Follow> followTable ;
+    public static TableSQL<Notification> notificationTable;
 
 
     private static DBManager instance;
@@ -29,6 +31,11 @@ public class DBManager {
             System.out.println("Connected to the database!");
             userTable = new TableSQL<>(connection, "users", new UserParser());
             postTable = new TableSQL<>(connection, "posts", new PostParser());
+            commentTable = new TableSQL<>(connection, "comments", new CommentParser());
+            likeTable = new TableSQL<>(connection, "likes", new LikeParser());
+            followTable = new TableSQL<>(connection, "follows", new FollowParser());
+            notificationTable = new TableSQL<>(connection, "notifications", new NotificationParser());
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

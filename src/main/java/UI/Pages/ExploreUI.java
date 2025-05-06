@@ -11,7 +11,7 @@ import java.awt.*;
 
 /**
  * Explore UI is the class that creates the explore page in the main app.
- * Users can lookup other users or view posts of all users
+ * Users can look up other users or view posts of all users
  * <p>
  *     The page consists of:
  *     <li>A search bar at the top to find users</li>
@@ -35,7 +35,7 @@ public class ExploreUI extends TemplateUI {
      * It adds the main content panel to the UI and ensures proper focus and rendering.
      */
     @Override
-    protected void initializeUI() {
+    protected void initializeUI() throws Exception {
 
         add(createMainContentPanel());
 
