@@ -23,7 +23,7 @@ public abstract class TemplateUI extends JPanel {
      * configures visual properties, and calls the abstract initializeUI method
      * which must be implemented by subclasses.
      */
-    public TemplateUI() {
+    public TemplateUI() throws Exception {
         this.user = QuakstagramHomeLogic.getCurrUser();
         setLayout(new BorderLayout());
         setOpaque(true);
