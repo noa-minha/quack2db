@@ -21,7 +21,8 @@ public class UserParser implements Parser<User>{
         String password = rs.getString("passwrd");
         String bio = rs.getString("bio");
         String profilePicPath = rs.getString("profile_pic_path");
-        User user = new User(user_id, username, password, bio, profilePicPath);
+        Boolean currUser = rs.getBoolean("curr_user");
+        User user = new User(user_id, username, password, bio, profilePicPath, currUser);
         return user;
     }
 

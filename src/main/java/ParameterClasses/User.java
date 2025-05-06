@@ -15,7 +15,7 @@ public class User{
     private String profilePicPath;
     // TODO : do we need these?
     // TODO:change comments
-    // private boolean currentUser;
+    private boolean currentUser;
     // private DateTime createdAt;
 
 
@@ -27,7 +27,7 @@ public class User{
      * @param profilePicPath
      */
 
-    public User(int userID, String username, String password, String bio, String profilePicPath){
+    public User(int userID, String username, String password, String bio, String profilePicPath, boolean currUser){
         this.userID = userID;
         this.username = username;
         this.password = password;
@@ -38,6 +38,7 @@ public class User{
         else{
             this.profilePicPath = profilePicPath;
         }
+        this.currentUser = currUser;
     }
 
     /**
@@ -48,6 +49,7 @@ public class User{
     public String getProfilePicPath() { return profilePicPath; }
     public String getPassword() { return password; }
     public int getUserID() {return userID; }
+    public boolean isCurrUser() {return currentUser; }
 
 
     // TODO: is needed? delete?

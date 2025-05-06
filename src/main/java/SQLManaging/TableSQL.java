@@ -13,6 +13,9 @@ import ParameterClasses.User;
 import TableManaging.Parsers.Parser;
 import TableManaging.Parsers.UserParser;
 
+// TODO : delete main
+// TODO : make these reaise exception and handle it elsewhere
+
 public class TableSQL<T> implements Table<T>{
     private final Connection connection;
     private final String tableName;
@@ -56,18 +59,14 @@ public class TableSQL<T> implements Table<T>{
 
     }
 
-    // Update rows (based on condition) with new data
-    // public void update(T newItem) {
-    //     String sql = "UPDATE " + tableName + " SET " + parser.getUpdateValues(newData);
-    //     if (whereCondition != null && !whereCondition.isEmpty()) {
-    //         sql += " WHERE " + whereCondition;
-    //     }
-    //     try (Statement stmt = connection.createStatement()) {
-    //         stmt.executeUpdate(sql);
-    //     } catch (SQLException e) {
-    //         e.printStackTrace();
-    //     }
-    // }
+    public void update(String setClause, String whereClause) {
+            String sql = "UPDATE " + tableName + " SET " + setClause + " WHERE " + whereClause;
+            try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+                stmt.executeUpdate(); // no parameters to bind
+            } catch (SQLException e) {
+                e.printStackTrace(); // or handle more gracefully
+            }
+    }
 
     // Delete rows based on a WHERE condition
     public void delete(T item) {
