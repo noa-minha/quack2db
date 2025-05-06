@@ -2,13 +2,13 @@ package Logic.Pages;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 
 import Logic.LogicClass;
 import Logic.TimeUtil;
 import ParameterClasses.User;
-
-import static TableManaging.DB.USERS;
+import SQLManaging.DBManager;
 
 /**
  * Class that handles the logic of ShowPostUI
@@ -29,11 +29,9 @@ public class ShowPostLogic extends LogicClass{
      * @return true if the post belongs to the current user, false otherwise
      */
     public static boolean isLoggedInUser(String profileUser){
-        Predicate<User> condition = user -> user.getUsername().equals(profileUser);
-        ArrayList<User> queryResult = USERS.fetchRows(condition);
-        User currUser = getCurrUser();
-        User otherUser = queryResult.get(0);
-        return currUser.equals(otherUser);
+        List<User> user = DBManager.userTable.fetchRows("curr_user = " + 1);
+        String currUser = user.get(0).getUsername();
+        return currUser.equals(profileUser);
     }
 
 }
