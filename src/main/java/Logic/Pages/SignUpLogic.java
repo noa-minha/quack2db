@@ -1,9 +1,7 @@
 package Logic.Pages;
 
 import Logic.LogicClass;
-import ParameterClasses.Following;
 import ParameterClasses.User;
-import TableManaging.DB;
 
 /**
  * Class that handles the logic of SignUpUI

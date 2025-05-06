@@ -1,5 +1,7 @@
 package UI.Pages;
 
+import ParameterClasses.User;
+import SQLManaging.DBManager;
 import UI.BaseFrame;
 import UI.Panels.RegularDisplayedPost;
 import UI.TemplateUI;
@@ -13,6 +15,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 
 
@@ -120,7 +123,15 @@ public class QuakstagramHomeUI extends TemplateUI {
      * Creates a label displaying the post's username
      */
     private JLabel createUsernameLabel(Post post) {
-        JLabel nameLabel = new JLabel(post.getUsername());
+        JLabel nameLabel = new JLabel("");
+        int user_id = post.getUserID();
+        List<User> user = DBManager.userTable.fetchRows("user_id = "+user_id);
+        try {
+            nameLabel = new JLabel(user.get(0).getUsername());
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         nameLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         return nameLabel;
     }
