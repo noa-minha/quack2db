@@ -17,8 +17,8 @@ public class SignUpLogic {
      */
     public static void signUpUser(User newUser) throws Exception{
         String username = newUser.getUsername();
-        List<User> user = DBManager.userTable.fetchRows("username = "+username);
-        if (user.size()>0){
+        List<User> user = DBManager.userTable.fetchRows("username = '" + username + "'");
+        if (!user.isEmpty()){
             throw new Exception("Username already exists, choose a different one.");
         }
         // add the new user

@@ -48,7 +48,6 @@ public class TableSQL<T> implements Table<T>{
     // Insert a new row (object T) into the table
     public void insert(T item) {
         String sql = "INSERT INTO " + tableName + " (" + parser.getColumns() + ") VALUES (" + parser.getPlaceholders() + ")";
-        System.out.println(sql);
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             parser.toPreparedStatement(stmt, item);  // Use the parser to set values in the prepared statement
             stmt.executeUpdate();  // Execute the insert statement

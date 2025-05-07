@@ -106,10 +106,10 @@ public class BaseFrame extends JFrame {
         DBManager.init();
         System.out.println("init");
 
-        // // Update all users curr_user to 0
-        // String setClause = "curr_user = 0";
-        // DBManager.userTable.update(setClause);
-        // System.out.println("update");
+        // Update all users curr_user to 0
+        String setClause = "curr_user = 0";
+        DBManager.userTable.update(setClause);
+        System.out.println("update");
 
         SwingUtilities.invokeLater(() -> {
             BaseFrame frame = new BaseFrame();
