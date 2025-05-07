@@ -31,4 +31,14 @@ public class ShowPostLogic {
         return currUser.equals(profileUser);
     }
 
+    public static String getPostUsername(int userID) {
+        List<User> user = DBManager.userTable.fetchRows("user_id = " + userID);
+        return user.get(0).getUsername();
+    }
+
+    public static int getLikesCount(int postID) {
+        String func = "count_likes(" + postID + ")";
+        return DBManager.runFunc(func);
+    }
+
 }

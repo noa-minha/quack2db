@@ -3,11 +3,15 @@ package SQLManaging.Parsers;
 import java.util.Collections;
 import java.util.List;
 
+import javax.swing.plaf.basic.BasicListUI.ListSelectionHandler;
+
 import ParameterClasses.Post;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 /**
  * A parser for the Parameter Object Post
@@ -22,8 +26,10 @@ public class PostParser implements Parser<Post>{
         int userID = rs.getInt("user_id");
         String imgPath = rs.getString("image_path");
         String caption = rs.getString("caption");
+        Timestamp timestamp = rs.getTimestamp("created_at");
+        LocalDateTime createdAt = timestamp.toLocalDateTime();
 
-        Post newPost = new Post(postID, userID, imgPath, caption);
+        Post newPost = new Post(postID, userID, imgPath, caption, createdAt);
         return newPost;
     }
 

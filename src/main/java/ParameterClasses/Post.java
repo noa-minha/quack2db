@@ -1,5 +1,7 @@
 package ParameterClasses;
 
+import java.time.LocalDateTime;
+
 /**
  * An object that represents a post
  */
@@ -9,16 +11,18 @@ public class Post {
     private int userID;
     private String imgPath;
     private String caption;
+    private LocalDateTime createdAt;
 
 
     /**
      * Constructor for post object
      */
-    public Post(int postID, int userID, String imgPath, String caption) {
+    public Post(int postID, int userID, String imgPath, String caption, LocalDateTime createdAt) {
         this.postID = postID;
         this.userID = userID;
         this.imgPath = imgPath;
         this.caption = caption;
+        this.createdAt = createdAt;
     }
 
     // Getters
@@ -36,6 +40,10 @@ public class Post {
 
     public String getCaption() {
         return caption;
+    }
+
+    public LocalDateTime getCreatedAt(){
+        return createdAt;
     }
 
     @Override

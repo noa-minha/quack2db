@@ -162,7 +162,7 @@ public class ImageUploadUI extends TemplateUI {
         }
 
         String imagePath = saveImageFile(selectedFile);
-        Post post = new Post(0,user.getUserID(), imagePath, captionText);
+        Post post = new Post(0,user.getUserID(), imagePath, captionText, null);
         ImageUploadLogic.saveImage(post);
         JOptionPane.showMessageDialog(this, "Image successfully saved!");
         BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(this);

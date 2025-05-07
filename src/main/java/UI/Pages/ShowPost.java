@@ -142,7 +142,7 @@ public class ShowPost extends TemplateUI {
      * Creates an interactive username button
      */
     private JButton createUsernameButton() {
-        JButton usernameButton = new JButton(post.getUsername());
+        JButton usernameButton = new JButton(ShowPostLogic.getPostUsername(post.getUserID()));
         usernameButton.setBorderPainted(false);
         usernameButton.setContentAreaFilled(false);
         usernameButton.addActionListener(e -> showUserProfile());
@@ -153,7 +153,7 @@ public class ShowPost extends TemplateUI {
      * Creates a label showing time since post was created
      */
     private JLabel createTimestampLabel() {
-        LocalDateTime postTime = post.getTimePosted();
+        LocalDateTime postTime = post.getCreatedAt();
         JLabel timeLabel = new JLabel(ShowPostLogic.calculateTimeSincePosting(postTime));
         timeLabel.setHorizontalAlignment(JLabel.RIGHT);
         return timeLabel;
@@ -189,7 +189,7 @@ public class ShowPost extends TemplateUI {
      * Creates a label displaying the post's like count
      */
     private JLabel createLikesLabel() {
-        JLabel likesLabel = new JLabel("" + post.getLikesCount());
+        JLabel likesLabel = new JLabel("" + ShowPostLogic.getLikesCount(post.getPostID()));
         likesLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         return likesLabel;
     }
@@ -218,7 +218,7 @@ public class ShowPost extends TemplateUI {
                 }
 
                 updateLikeButtonAppearance(likeButton, currentlyLiked);
-                likesLabel.setText("" + post.getLikesCount());
+                likesLabel.setText("" + ShowPostLogic.getLikesCount(post.getPostID()));
             }
         });
 
