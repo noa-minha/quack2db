@@ -25,7 +25,7 @@ public class ExploreUI extends TemplateUI {
      * Initializes the UI by calling the superclass constructor.
      * @see TemplateUI
      */
-    public ExploreUI() {
+    public ExploreUI() throws Exception {
         super();
     }
 

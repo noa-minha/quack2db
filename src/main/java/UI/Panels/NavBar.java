@@ -128,7 +128,11 @@ public class NavBar extends JPanel {
         exploreButton = createIconButton("img/icons/search.png", "explore", ui);
         exploreButton.addActionListener(e -> {
             BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(this);
-            parentFrame.switchPanel(new ExploreUI());
+            try {
+                parentFrame.switchPanel(new ExploreUI());
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
         });
         return exploreButton;
 
