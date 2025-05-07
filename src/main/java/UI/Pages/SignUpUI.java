@@ -38,7 +38,7 @@ public class SignUpUI extends TemplateUI {
      * Initializes the UI by calling the superclass constructor.
      * @see TemplateUI
      */
-    public SignUpUI() {
+    public SignUpUI() throws Exception {
         super();
         profilePicPath = null;
     }
@@ -180,7 +180,7 @@ public class SignUpUI extends TemplateUI {
         String password = new String(passwordField.getPassword());
         String bio = bioArea.getText();
 
-        User newUser = new User(username, bio, password, profilePicPath);
+        User newUser = new User(0,username, bio, password, profilePicPath,true);
 
         try {
             SignUpLogic.signUpUser(newUser);

@@ -63,7 +63,11 @@ public class NavBar extends JPanel {
             }
             else{
                 BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(this);
-                parentFrame.switchPanel(new SignUpUI());
+                try {
+                    parentFrame.switchPanel(new SignUpUI());
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
 
