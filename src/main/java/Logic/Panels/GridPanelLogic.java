@@ -28,14 +28,15 @@ public class GridPanelLogic {
     /**
      * Returns a list of all posts not from current user
      */
-    public static List<Post> getAllOtherUserPosts() throws Exception {
+    public static List<Post> getAllOtherUserPosts(){
         //TODO - MAKE SURE ATTRIBUTE NAME IS RIGHT
         List<User> user = DBManager.userTable.fetchRows("curr_user = " + 1);
         int currUser_id = 0;
         if (user != null) {
             currUser_id = user.get(0).getUserID();
         } else {
-            throw new Exception("no user is connected");
+            // throw new Exception("no user is connected");
+            System.out.println("no user is connected");
         }
 
         //TODO - DECIDE WHAT POSTS WE WANT TO SHOW. ATM ALL POSTS FROM ALL USERS
@@ -59,7 +60,7 @@ public class GridPanelLogic {
      * @param user - the given user (in case of profile), null if explore page
      * @return List of the type Post
      */
-    public static List<Post> fetchAllPosts(User user) throws Exception {
+    public static List<Post> fetchAllPosts(User user){
         List<User> users = DBManager.userTable.fetchRows("user_id = " + user.getUserID());
         if (!users.isEmpty()) {
             return getUserPosts(user);

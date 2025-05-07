@@ -57,20 +57,11 @@ public class NavBar extends JPanel {
         switchButton.addActionListener(e -> {
             if(ui.getName().equals("Sign Up")){
                 BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(this);
-                try {
-                    parentFrame.switchPanel(new SignInUI());
-                } catch (Exception e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                }
+                parentFrame.switchPanel(new SignInUI());
             }
             else{
                 BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(this);
-                try {
-                    parentFrame.switchPanel(new SignUpUI());
-                } catch (Exception ex) {
-                    throw new RuntimeException(ex);
-                }
+                parentFrame.switchPanel(new SignUpUI());
             }
         });
 
@@ -119,12 +110,7 @@ public class NavBar extends JPanel {
         homeButton = createIconButton("img/icons/home.png", "explore", ui);
         homeButton.addActionListener(e -> {
             BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(this);
-            try {
-                parentFrame.switchPanel(new QuakstagramHomeUI());
-            } catch (Exception e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
+            parentFrame.switchPanel(new QuakstagramHomeUI());
         });
         return homeButton;
     }
@@ -140,11 +126,7 @@ public class NavBar extends JPanel {
         exploreButton = createIconButton("img/icons/search.png", "explore", ui);
         exploreButton.addActionListener(e -> {
             BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(this);
-            try {
-                parentFrame.switchPanel(new ExploreUI());
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
-            }
+            parentFrame.switchPanel(new ExploreUI());
         });
         return exploreButton;
 
@@ -161,11 +143,7 @@ public class NavBar extends JPanel {
         imageUploadButton = createIconButton("img/icons/add.png", "explore", ui);
         imageUploadButton.addActionListener(e -> {
             BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(this);
-            try {
-                parentFrame.switchPanel(new ImageUploadUI());
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
-            }
+            parentFrame.switchPanel(new ImageUploadUI());
         });
         return imageUploadButton;
     }
@@ -181,12 +159,7 @@ public class NavBar extends JPanel {
         notificationButton = createIconButton("img/icons/heart.png", "explore", ui);
         notificationButton.addActionListener(e -> {
             BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(this);
-            try {
-                parentFrame.switchPanel(new NotificationsUI());
-            } catch (Exception e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
+            parentFrame.switchPanel(new NotificationsUI());
         });
         return notificationButton;
     }
@@ -204,12 +177,7 @@ public class NavBar extends JPanel {
         profileButton.addActionListener(e -> {
             BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(this);
             List<User> user = DBManager.userTable.fetchRows("curr_user = " + 1);
-            try {
-                parentFrame.switchPanel(new InstagramProfileUI(user.get(0)));
-            } catch (Exception e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
+            parentFrame.switchPanel(new InstagramProfileUI(user.get(0)));
         });
         return profileButton;
     }

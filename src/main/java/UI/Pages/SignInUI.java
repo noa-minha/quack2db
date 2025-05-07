@@ -26,7 +26,7 @@ public class SignInUI extends TemplateUI {
      * @throws Exception 
      * @see TemplateUI
      */
-    public SignInUI() throws Exception {
+    public SignInUI() {
         super();
     }
 

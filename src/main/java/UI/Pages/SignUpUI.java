@@ -38,7 +38,7 @@ public class SignUpUI extends TemplateUI {
      * Initializes the UI by calling the superclass constructor.
      * @see TemplateUI
      */
-    public SignUpUI() throws Exception {
+    public SignUpUI(){
         super();
         profilePicPath = null;
     }

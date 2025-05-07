@@ -40,7 +40,7 @@ public class QuakstagramHomeUI extends TemplateUI {
      *
      * @see TemplateUI
      */
-    public QuakstagramHomeUI() throws Exception {
+    public QuakstagramHomeUI() {
         super();
     }
 

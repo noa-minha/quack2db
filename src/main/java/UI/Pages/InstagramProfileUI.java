@@ -36,7 +36,7 @@ public class InstagramProfileUI extends TemplateUI {
      *
      * @see TemplateUI
      */
-    public InstagramProfileUI(User profileUser) throws Exception {
+    public InstagramProfileUI(User profileUser){
         super();                                                        
         this.profileUser = profileUser;
         contentPanel = new JPanel();
@@ -60,7 +60,7 @@ public class InstagramProfileUI extends TemplateUI {
      * It adds the main content panel to the UI and ensures proper focus and rendering.
      */
     @Override
-    public void initializeUI() throws Exception {
+    public void initializeUI(){
         // Initialize the image grid
         GridPanel gridPanel = new GridPanel(profileUser);
         add(gridPanel);
@@ -166,12 +166,7 @@ public class InstagramProfileUI extends TemplateUI {
                 InstagramProfileLogic.removeFollower(profileUser);
                 followButton.setText("Follow");
             }
-            try {
-                refreshPanel();
-            } catch (Exception e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
+            refreshPanel();
         });
 
         return followButton;
@@ -241,7 +236,7 @@ public class InstagramProfileUI extends TemplateUI {
      * refreshes the page whenever a triggering action occurs
      * @throws Exception 
      */
-    private void refreshPanel() throws Exception {
+    private void refreshPanel() {
         BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(this);
         parentFrame.switchPanel(new InstagramProfileUI(profileUser));
     }

@@ -24,9 +24,9 @@ public abstract class TemplateUI extends JPanel {
      * configures visual properties, and calls the abstract initializeUI method
      * which must be implemented by subclasses.
      */
-    public TemplateUI() throws Exception {
-        List<User> user = DBManager.userTable.fetchRows("curr_user = " + 1);
-        this.user = user.get(0);
+    public TemplateUI() {
+        // List<User> user = DBManager.userTable.fetchRows("curr_user = " + 1);
+        // this.user = user.get(0);
         setLayout(new BorderLayout());
         setOpaque(true);
         setPreferredSize(new Dimension(300, 400));
@@ -37,7 +37,7 @@ public abstract class TemplateUI extends JPanel {
      * Abstract method that must be implemented by all subclasses to initialize
      * their specific UI components and layout.
      */
-    protected abstract void initializeUI() throws Exception;
+    protected abstract void initializeUI();
 
     /**
      * Returns the name of this UI panel. Used for identification and navigation purposes.

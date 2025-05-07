@@ -25,7 +25,7 @@ public class ExploreUI extends TemplateUI {
      * Initializes the UI by calling the superclass constructor.
      * @see TemplateUI
      */
-    public ExploreUI() throws Exception {
+    public ExploreUI(){
         super();
     }
 
@@ -35,7 +35,7 @@ public class ExploreUI extends TemplateUI {
      * It adds the main content panel to the UI and ensures proper focus and rendering.
      */
     @Override
-    protected void initializeUI() throws Exception {
+    protected void initializeUI() {
 
         add(createMainContentPanel());
 
@@ -71,7 +71,7 @@ public class ExploreUI extends TemplateUI {
      * @see ExploreUILogic#performSearch(String)
      * @see InstagramProfileUI
      */
-    private JPanel createMainContentPanel() throws Exception {
+    private JPanel createMainContentPanel() {
         // Create the main content panel with search and image grid
         // Search bar at the top
         JPanel searchPanel = new JPanel(new BorderLayout());

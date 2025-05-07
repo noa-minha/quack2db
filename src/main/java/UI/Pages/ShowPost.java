@@ -39,7 +39,7 @@ public class ShowPost extends TemplateUI {
      * @throws Exception 
      * @see TemplateUI
      */
-    public ShowPost(Post post) throws Exception {
+    public ShowPost(Post post){
         super();
         this.post = post;
     }
@@ -95,12 +95,8 @@ public class ShowPost extends TemplateUI {
      */
     private void navigateToHome() {
         BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(this);
-        try {
-            parentFrame.switchPanel(new QuakstagramHomeUI());
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        parentFrame.switchPanel(new QuakstagramHomeUI());
+
     }
 
     /**
@@ -248,10 +244,6 @@ public class ShowPost extends TemplateUI {
         BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(this);
         int user_id = post.getUserID();
         List<User>profileUser = DBManager.userTable.fetchRows("user_id=" + user_id);
-        try {
-            parentFrame.switchPanel(new InstagramProfileUI(profileUser.get(0)));
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
+        parentFrame.switchPanel(new InstagramProfileUI(profileUser.get(0)));
     }
 }

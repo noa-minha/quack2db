@@ -25,7 +25,7 @@ public class NotificationsUI extends TemplateUI {
      * @throws Exception 
      * @see TemplateUI
      */
-    public NotificationsUI() throws Exception {
+    public NotificationsUI() {
         super();
     }
 

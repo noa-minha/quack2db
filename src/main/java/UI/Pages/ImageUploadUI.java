@@ -43,7 +43,7 @@ public class ImageUploadUI extends TemplateUI {
      * Initializes the UI by calling the superclass constructor.
      * @see TemplateUI
      */
-    public ImageUploadUI() throws Exception {
+    public ImageUploadUI() {
         super();
     }
 
