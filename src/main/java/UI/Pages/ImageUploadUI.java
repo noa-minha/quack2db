@@ -162,18 +162,14 @@ public class ImageUploadUI extends TemplateUI {
         }
 
         String imagePath = saveImageFile(selectedFile);
-        Post post = new Post(0,user.getUserID(), imagePath, captionText, null);
+        List<User> user = DBManager.userTable.fetchRows("curr_user = " + 1);
+        User curruser =  user.get(0);
+        Post post = new Post(0,curruser.getUserID(), imagePath, captionText, null);
         ImageUploadLogic.saveImage(post);
         JOptionPane.showMessageDialog(this, "Image successfully saved!");
         BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(this);
-        List<User> user = DBManager.userTable.fetchRows("curr_user = " + 1);
-        User curruser =  user.get(0);
-        try {
-            parentFrame.switchPanel(new InstagramProfileUI(curruser));
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        parentFrame.switchPanel(new InstagramProfileUI(curruser));
+
     }
 
     /**

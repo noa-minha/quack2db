@@ -16,7 +16,7 @@ public abstract class TemplateUI extends JPanel {
     /**
      * The current user of the application
      */
-    protected User user;
+    // protected User user;
 
     /**
      * Constructs a new TemplateUI with standard constructor.

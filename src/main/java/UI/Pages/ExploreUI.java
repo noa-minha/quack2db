@@ -100,7 +100,7 @@ public class ExploreUI extends TemplateUI {
             String searchText = searchField.getText().trim();
             if (!searchText.isEmpty()) {
                 try {
-                    user = ExploreUILogic.performSearch(searchText);
+                    User user = ExploreUILogic.performSearch(searchText);
                     BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(this);
                     parentFrame.switchPanel(new InstagramProfileUI(user));
                 } catch (Exception exception){
