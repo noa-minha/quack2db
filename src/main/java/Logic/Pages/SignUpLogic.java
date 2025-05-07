@@ -21,18 +21,11 @@ public class SignUpLogic {
         if (user.size()>0){
             throw new Exception("Username already exists, choose a different one.");
         }
-        addUser(newUser);
-        saveCurrUserInformation(newUser);
+        // add the new user
+        DBManager.userTable.insert(newUser);
+
+        // make it the curr user
+        String setClause = "curr_user = 1 WHERE username = '" + username + "'";
+        DBManager.userTable.update(setClause);
     }
-
-
-
-    /**
-     * Adds the new user to all relevant tables
-     */
-    private static void addUser(User user) {
-        // adds user to USERS table
-        DBManager.userTable.insert(user);
-    }
-
 }
