@@ -82,4 +82,9 @@ public class QuakstagramHomeLogic {
         if (likedPost == null) return false;
         else return true;
     }
+
+    public static int getLikesCount(int postID) {
+        String func = "count_likes(" + postID + ")";
+        return DBManager.runFunc(func);
+    }
 }

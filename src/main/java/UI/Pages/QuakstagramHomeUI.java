@@ -157,7 +157,7 @@ public class QuakstagramHomeUI extends TemplateUI {
      * Creates a label displaying the post's like count
      */
     private JLabel createLikesLabel(Post post) {
-        JLabel likesLabel = new JLabel("" + post.getLikesCount());
+        JLabel likesLabel = new JLabel("" + QuakstagramHomeLogic.getLikesCount(post.getPostID()));
         likesLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         return likesLabel;
     }
@@ -216,7 +216,7 @@ public class QuakstagramHomeUI extends TemplateUI {
      * Updates the displayed like count
      */
     private void updateLikesCount(JLabel likesLabel, Post post) {
-        likesLabel.setText("" + post.getLikesCount());
+        likesLabel.setText("" + QuakstagramHomeLogic.getLikesCount(post.getPostID()));
     }
 
     /**
