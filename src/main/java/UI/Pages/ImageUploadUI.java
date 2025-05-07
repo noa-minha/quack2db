@@ -3,6 +3,8 @@ package UI.Pages;
 import Logic.LogicClass;
 import Logic.Pages.ImageUploadLogic;
 import ParameterClasses.Post;
+import ParameterClasses.User;
+import SQLManaging.DBManager;
 import UI.BaseFrame;
 import UI.TemplateUI;
 import java.awt.*;
@@ -11,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.BadLocationException;
@@ -41,7 +44,7 @@ public class ImageUploadUI extends TemplateUI {
      * Initializes the UI by calling the superclass constructor.
      * @see TemplateUI
      */
-    public ImageUploadUI() {
+    public ImageUploadUI() throws Exception {
         super();
     }
 
@@ -160,11 +163,13 @@ public class ImageUploadUI extends TemplateUI {
         }
 
         String imagePath = saveImageFile(selectedFile);
-        Post post = new Post(user.getUsername(), imagePath, captionText);
+        Post post = new Post(0,user.getUserID(), imagePath, captionText);
         ImageUploadLogic.saveImage(post);
         JOptionPane.showMessageDialog(this, "Image successfully saved!");
         BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(this);
-        parentFrame.switchPanel(new InstagramProfileUI(LogicClass.getCurrUser()));
+        List<User> user = DBManager.userTable.fetchRows("curr_user = " + 1);
+        User curruser =  user.get(0);
+        parentFrame.switchPanel(new InstagramProfileUI(curruser));
     }
 
     /**

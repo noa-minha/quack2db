@@ -1,6 +1,8 @@
 
 package UI.Panels;
 
+import ParameterClasses.User;
+import SQLManaging.DBManager;
 import UI.TemplateUI;
 
 import UI.Pages.SignInUI;
@@ -12,6 +14,7 @@ import javax.swing.*;
 import Logic.LogicClass;
 
 import java.awt.*;
+import java.util.List;
 
 /**
  * Navigation bar component for the application user interface.
@@ -142,7 +145,11 @@ public class NavBar extends JPanel {
         imageUploadButton = createIconButton("img/icons/add.png", "explore", ui);
         imageUploadButton.addActionListener(e -> {
             BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(this);
-            parentFrame.switchPanel(new ImageUploadUI());
+            try {
+                parentFrame.switchPanel(new ImageUploadUI());
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
         });
         return imageUploadButton;
     }
@@ -175,7 +182,8 @@ public class NavBar extends JPanel {
         profileButton = createIconButton("img/icons/profile.png", "explore", ui);
         profileButton.addActionListener(e -> {
             BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(this);
-            parentFrame.switchPanel(new InstagramProfileUI(LogicClass.getCurrUser()));
+            List<User> user = DBManager.userTable.fetchRows("curr_user = " + 1);
+            parentFrame.switchPanel(new InstagramProfileUI(user.get(0)));
         });
         return profileButton;
     }

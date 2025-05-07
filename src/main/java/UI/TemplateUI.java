@@ -3,8 +3,10 @@ package UI;
 import javax.swing.*;
 import Logic.Pages.QuakstagramHomeLogic;
 import ParameterClasses.User;
+import SQLManaging.DBManager;
 
 import java.awt.*;
+import java.util.List;
 
 /**
  * An abstract template class that serves as the foundation for all UI panels in the app.
@@ -24,7 +26,8 @@ public abstract class TemplateUI extends JPanel {
      * which must be implemented by subclasses.
      */
     public TemplateUI() throws Exception {
-        this.user = QuakstagramHomeLogic.getCurrUser();
+        List<User> user = DBManager.userTable.fetchRows("curr_user = " + 1);
+        this.user = user.get(0);
         setLayout(new BorderLayout());
         setOpaque(true);
         setPreferredSize(new Dimension(300, 400));
