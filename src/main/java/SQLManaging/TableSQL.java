@@ -33,13 +33,14 @@ public class TableSQL<T> implements Table<T>{
             sql += " WHERE " + condition;
         }
 
+        System.out.println(sql);
         try (Statement stmt = connection.createStatement()) {
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 resultList.add(parser.parseRow(rs));  // Using the parser to convert each row into a User object
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("problem with fetch");
         }
         return resultList;
     }
@@ -47,11 +48,12 @@ public class TableSQL<T> implements Table<T>{
     // Insert a new row (object T) into the table
     public void insert(T item) {
         String sql = "INSERT INTO " + tableName + " (" + parser.getColumns() + ") VALUES (" + parser.getPlaceholders() + ")";
+        System.out.println(sql);
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             parser.toPreparedStatement(stmt, item);  // Use the parser to set values in the prepared statement
             stmt.executeUpdate();  // Execute the insert statement
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("problem with insert");
         }
 
     }
@@ -61,7 +63,7 @@ public class TableSQL<T> implements Table<T>{
             try (PreparedStatement stmt = connection.prepareStatement(sql)) {
                 stmt.executeUpdate(); // no parameters to bind
             } catch (SQLException e) {
-                e.printStackTrace(); // or handle more gracefully
+                System.out.println("problem with update");
             }
     }
 
@@ -78,7 +80,7 @@ public class TableSQL<T> implements Table<T>{
             parser.setUniqueIdentifier(stmt, item); // You define this
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("problem with delete");
         }
     }
 

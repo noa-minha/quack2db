@@ -17,7 +17,7 @@ public class SignInLogic{
      * @throws Exception - in case the user does not exist / in case the password is incorrect
      */
     public static User signInUser(String username, String password) throws Exception{
-        List<User> user = DBManager.userTable.fetchRows("username = " + username);
+        List<User> user = DBManager.userTable.fetchRows("username = '" + username + "'");
 
         if (user.isEmpty()){
             throw new Exception("User does not exist / username is wrong. Please sign up.");
