@@ -61,8 +61,7 @@ public class GridPanelLogic {
      * @return List of the type Post
      */
     public static List<Post> fetchAllPosts(User user){
-        List<User> users = DBManager.userTable.fetchRows("user_id = " + user.getUserID());
-        if (!users.isEmpty()) {
+        if (user !=null) {
             return getUserPosts(user);
         }
         return getAllOtherUserPosts();
