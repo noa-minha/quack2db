@@ -1,41 +1,40 @@
 package Logic.Pages;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 
 import Logic.LogicClass;
 import ParameterClasses.Follow;
-import ParameterClasses.Following;
-import ParameterClasses.Notification;
-import ParameterClasses.Post;
 import ParameterClasses.User;
 import SQLManaging.DBManager;
-import TableManaging.DB;
 
 
 /**
  * Class that handles the logic of InstagramProfileUI
  */
-public class InstagramProfileLogic extends LogicClass{
+public class InstagramProfileLogic extends LogicClass {
 
     /**
      * Recieves a user and checks if it is the current user
+     *
      * @return true if same user, false otherwise
      */
-    public static boolean isLoggedInUser(User profileUser){
-        User currUser = getCurrUser();
+    public static boolean isLoggedInUser(User profileUser) {
+        List<User> user = DBManager.userTable.fetchRows("curr_user = " + 1);
+        User currUser = user.get(0);
         return currUser.equals(profileUser);
     }
 
     /**
      * Checks if the current user if following the given user
+     *
      * @return true if current user is following, false otherwise
      */
-    public static boolean isCurrUsersFollowing(User profileUser){
-        User loggedInUser = getCurrUser();
-        List<Follow>following = DBManager.followTable.fetchRows("follower_id= "+loggedInUser.getUserID()+" , followee_id= "+profileUser.getUserID());
-        if(following!=null){
+    public static boolean isCurrUsersFollowing(User profileUser) {
+        List<User> user = DBManager.userTable.fetchRows("curr_user = " + 1);
+
+        User loggedInUser = user.get(0);
+        List<Follow> following = DBManager.followTable.fetchRows("follower_id= " + loggedInUser.getUserID() + " , followee_id= " + profileUser.getUserID());
+        if (following != null) {
             return true;
         }
         return false;
@@ -46,83 +45,23 @@ public class InstagramProfileLogic extends LogicClass{
      * Adds the given user to the folllowing list of the current user
      * updates all necessary tables
      */
-    public static void addFollower(User profileUser){
-        User currUser = getCurrUser();
-        Following currUserFollowing = getFollowing(currUser);
-        String currUsername = currUser.getUsername();
-        String profileUsername = profileUser.getUsername();
-
-
+    public static void addFollower(User profileUser) {
+        List<User> user = DBManager.userTable.fetchRows("curr_user = " + 1);
+        User currUser = user.get(0);
         //add follower
-        currUserFollowing = currUserFollowing.followUser(profileUsername);    
-        currUser = currUser.addfollowing();
-        profileUser = profileUser.addfollower();
-
-        //update following
-        Predicate<Following> condition1 = follow -> follow.getUsername().equals(currUsername);
-        DB.FOLLOWING.updateRows(condition1, currUserFollowing); 
-
-        //update followed user
-        Predicate<User> condition2 = user -> user.getUsername().equals(profileUsername);
-        DB.USERS.updateRows(condition2, profileUser); 
-
-        //update following user
-        Predicate<User> condition3 = user -> user.getUsername().equals(currUsername);
-        DB.USERS.updateRows(condition3, currUser); 
-        saveCurrUserInformation(currUser);
-
-        // adds a new notification
-        DB.NOTIFICATIONS.insertRow(new Notification(profileUsername, "follow"), true);
+        Follow follow = new Follow(currUser.getUserID(), profileUser.getUserID());
+        DBManager.followTable.insert(follow);
     }
-
-
-    /**
-     * Fetches the Folllowing object of the given user
-     */
-    private static Following getFollowing(User profileUser){
-        String username = profileUser.getUsername();
-        Predicate<Following> condition = follow -> follow.getUsername().equals(username);
-        return DB.FOLLOWING.fetchRows(condition).get(0);
-    }
-    
 
     /**
      * Stops following the given user and updates all relevant tables accordingly
      */
-    public static void removeFollower(User profileUser){
-        User currUser = getCurrUser();
-        Following currUserFollowing = getFollowing(currUser);
-        String currUsername = currUser.getUsername();
-        String profileUsername = profileUser.getUsername();
-
-
-        //remove follower
-        currUserFollowing = currUserFollowing.unfollowUser(profileUsername);    
-        currUser = currUser.removeFollowing();
-        profileUser = profileUser.removeFollower();
-
-        //update following
-        Predicate<Following> condition1 = follow -> follow.getUsername().equals(currUsername);
-        DB.FOLLOWING.updateRows(condition1, currUserFollowing); 
-
-        //update followed user
-        Predicate<User> condition2 = user -> user.getUsername().equals(profileUsername);
-        DB.USERS.updateRows(condition2, profileUser); 
-
-        //update following user
-        Predicate<User> condition3 = user -> user.getUsername().equals(currUsername);
-        DB.USERS.updateRows(condition3, currUser); 
-        saveCurrUserInformation(currUser);
-
-        //unlike all posts
-        Predicate<Post> condition4 = post -> post.getUsername().equals(profileUsername);
-        ArrayList<Post> posts = DB.POSTS.fetchRows(condition4);
-
-        for (Post post : posts){
-            if (QuakstagramHomeLogic.didUserAlreadyLike(post)){
-                QuakstagramHomeLogic.unLikePost(post);
-            }
+    public static void removeFollower(User profileUser) {
+        List<User> user = DBManager.userTable.fetchRows("curr_user = " + 1);
+        User currUser = user.get(0);
+        List<Follow> following = DBManager.followTable.fetchRows("follower_id= " + currUser.getUserID() + " , followee_id= " + profileUser.getUserID());
+        if (following != null) {
+            DBManager.followTable.delete(following.get(0));
         }
     }
-
 }

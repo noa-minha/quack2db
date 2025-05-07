@@ -61,6 +61,7 @@ public class GridPanelLogic extends LogicClass {
      * @return List of the type Post
      */
     public static List<Post> fetchAllPosts(User user) throws Exception {
+        List<User>user = DBManager.userTable.fetchRows("user_id = " + user.getUserID());
         if (userExists(user)) {
             return getUserPosts(user);
         }
