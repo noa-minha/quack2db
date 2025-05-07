@@ -45,7 +45,12 @@ public class RegularDisplayedPost extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 // Perform action when image is clicked
                 BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(RegularDisplayedPost.this);
-                parentFrame.switchPanel(new ShowPost(post));
+                try {
+                    parentFrame.switchPanel(new ShowPost(post));
+                } catch (Exception e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
             }
         });
     }

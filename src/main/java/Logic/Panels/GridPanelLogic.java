@@ -60,8 +60,8 @@ public class GridPanelLogic {
      * @return List of the type Post
      */
     public static List<Post> fetchAllPosts(User user) throws Exception {
-        List<User>user = DBManager.userTable.fetchRows("user_id = " + user.getUserID());
-        if (userExists(user)) {
+        List<User> users = DBManager.userTable.fetchRows("user_id = " + user.getUserID());
+        if (!users.isEmpty()) {
             return getUserPosts(user);
         }
         return getAllOtherUserPosts();
