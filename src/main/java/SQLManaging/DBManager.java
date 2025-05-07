@@ -18,7 +18,6 @@ public class DBManager {
 
     public static TableSQL<User> userTable;
     public static TableSQL<Post> postTable;
-    public static TableSQL<Comment> commentTable;
     public static TableSQL<Like> likeTable;
     public static TableSQL<Follow> followTable ;
     public static TableSQL<Notification> notificationTable;
@@ -34,7 +33,6 @@ public class DBManager {
             System.out.println("Connected to the database!");
             userTable = new TableSQL<>(connection, "users", new UserParser());
             postTable = new TableSQL<>(connection, "posts", new PostParser());
-            commentTable = new TableSQL<>(connection, "comments", new CommentParser());
             likeTable = new TableSQL<>(connection, "likes", new LikeParser());
             followTable = new TableSQL<>(connection, "follows", new FollowParser());
             notificationTable = new TableSQL<>(connection, "notifications", new NotificationParser());
