@@ -2,7 +2,6 @@ package UI.Pages;
 
 import ParameterClasses.User;
 import SQLManaging.DBManager;
-import UI.BaseFrame;
 import UI.Panels.RegularDisplayedPost;
 import UI.TemplateUI;
 
@@ -16,7 +15,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 
 
 /**

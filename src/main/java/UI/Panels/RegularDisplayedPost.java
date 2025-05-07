@@ -1,7 +1,6 @@
 package UI.Panels;
 
 import UI.BaseFrame;
-import UI.Pages.InstagramProfileUI;
 import UI.Pages.ShowPost;
 
 import javax.swing.*;

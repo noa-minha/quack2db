@@ -1,10 +1,8 @@
 package Logic.Pages;
 
 import ParameterClasses.Notification;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.function.Predicate;
+import SQLManaging.DBManager;
+import java.util.List;
 
 
 /**
@@ -15,21 +13,10 @@ public class NotificationsLogic {
     /**
      * @return an ArrayList of all relevant notifications for the current user
      */
-    public static ArrayList<Notification> fetchNotifications(){
-        String currUser = getCurrUser().getUsername();
-        Predicate<Notification> condition = notif -> notif.getRecievingUser().equals(currUser);
-        ArrayList<Notification> queryResult = DB.NOTIFICATIONS.fetchRows(condition); 
-        return reverseArrayOrder(queryResult);
+    public static List<Notification> fetchNotifications(){
+        List<Notification> notifications = DBManager.notificationTable.fetchRows(null);
+        return notifications;
     }
 
-    /**
-     * Makes sure most current notifications are on top older ones
-     * @param arr
-     * @return
-     */
-    private static ArrayList<Notification> reverseArrayOrder(ArrayList<Notification> arr){
-        Collections.reverse(arr);
-        return arr;
-    }
 
 }

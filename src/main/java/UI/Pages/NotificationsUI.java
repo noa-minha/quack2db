@@ -6,7 +6,7 @@ import UI.TemplateUI;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * notificationsUI is the class that creates the notification page in the main app.
@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class NotificationsUI extends TemplateUI {
     private JPanel contentPanel;
-    private ArrayList<Notification> notifications;
+    private List<Notification> notifications;
     private JScrollPane scrollPane;
 
 

@@ -1,7 +1,6 @@
 package UI;
 
 import javax.swing.*;
-import Logic.Pages.QuakstagramHomeLogic;
 import ParameterClasses.User;
 import SQLManaging.DBManager;
 
