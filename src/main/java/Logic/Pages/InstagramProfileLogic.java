@@ -2,7 +2,6 @@ package Logic.Pages;
 
 import java.util.List;
 
-import Logic.LogicClass;
 import ParameterClasses.Follow;
 import ParameterClasses.User;
 import SQLManaging.DBManager;
@@ -11,7 +10,7 @@ import SQLManaging.DBManager;
 /**
  * Class that handles the logic of InstagramProfileUI
  */
-public class InstagramProfileLogic extends LogicClass {
+public class InstagramProfileLogic {
 
     /**
      * Recieves a user and checks if it is the current user
@@ -63,5 +62,20 @@ public class InstagramProfileLogic extends LogicClass {
         if (following != null) {
             DBManager.followTable.delete(following.get(0));
         }
+    }
+
+    public static int getFollowersCount(int userID) {
+        String func = "count_followers(" + userID + ")";
+        return DBManager.runFunc(func);
+    }
+
+    public static int getFollowingCount(int userID) {
+        String func = "count_following(" + userID + ")";
+        return DBManager.runFunc(func);
+    }
+
+    public static int getPostsCount(int userID) {
+        String func = "count_posts(" + userID + ")";
+        return DBManager.runFunc(func);
     }
 }

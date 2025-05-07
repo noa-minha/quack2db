@@ -1,14 +1,13 @@
 package Logic.Pages;
 import java.util.List;
 
-import Logic.LogicClass;
 import ParameterClasses.User;
 import SQLManaging.DBManager;
 
 /**
  * Class that handles the logic of SignInUI
  */
-public class SignInLogic extends LogicClass{
+public class SignInLogic{
 
     /**
      * Signs in a user

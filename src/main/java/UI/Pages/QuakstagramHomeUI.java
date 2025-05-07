@@ -38,10 +38,11 @@ public class QuakstagramHomeUI extends TemplateUI {
     /**
      * Default constructor.
      * Initializes the UI by calling the superclass constructor.
+     * @throws Exception 
      *
      * @see TemplateUI
      */
-    public QuakstagramHomeUI() {
+    public QuakstagramHomeUI() throws Exception {
         super();
     }
 

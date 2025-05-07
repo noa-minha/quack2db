@@ -2,7 +2,10 @@ package SQLManaging;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+
 
 import ParameterClasses.*;
 import SQLManaging.Parsers.*;
@@ -22,7 +25,7 @@ public class DBManager {
 
 
     private static DBManager instance;
-    private Connection connection;
+    private static Connection connection;
 
     private DBManager(){
         try {
@@ -62,6 +65,21 @@ public class DBManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static int runFunc(String func) {
+        String sql = "SELECT " + func;
+    
+        try (Statement stmt = connection.createStatement()) {
+            ResultSet rs = stmt.executeQuery(sql);
+            if (rs.next()) {
+                return rs.getInt(1);  // Get the first (and only) column in the result
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    
+        return -1;
     }
         
 }

@@ -1,6 +1,5 @@
 package Logic.Pages;
 
-import Logic.LogicClass;
 import ParameterClasses.Post;
 import ParameterClasses.User;
 import SQLManaging.DBManager;
@@ -10,7 +9,7 @@ import java.util.List;
 /**
  * Class that handles the logic of ExploreUI
  */
-public class ExploreUILogic extends LogicClass {
+public class ExploreUILogic {
 
     /**
      * Searches for a user given a String username

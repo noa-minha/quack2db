@@ -32,10 +32,11 @@ public class InstagramProfileUI extends TemplateUI {
      * Default constructor.
      * Initializes the UI by calling the superclass constructor.
      * Saves the user whos profile is being displayed and creates corresponding header.
+     * @throws Exception 
      *
      * @see TemplateUI
      */
-    public InstagramProfileUI(User profileUser) {
+    public InstagramProfileUI(User profileUser) throws Exception {
         super();                                                        
         this.profileUser = profileUser;
         contentPanel = new JPanel();
@@ -140,9 +141,9 @@ public class InstagramProfileUI extends TemplateUI {
         statsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 0));
         statsPanel.setBackground(new Color(249, 249, 249));
 
-        statsPanel.add(createStatLabel(Integer.toString(profileUser.getPostsCount()), "Posts"));
-        statsPanel.add(createStatLabel(Integer.toString(profileUser.getFollowersCount()), "Followers"));
-        statsPanel.add(createStatLabel(Integer.toString(profileUser.getFollowingCount()), "Following"));
+        statsPanel.add(createStatLabel(Integer.toString(InstagramProfileLogic.getPostsCount(profileUser.getUserID())), "Posts"));
+        statsPanel.add(createStatLabel(Integer.toString(InstagramProfileLogic.getFollowersCount(profileUser.getUserID())), "Followers"));
+        statsPanel.add(createStatLabel(Integer.toString(InstagramProfileLogic.getFollowingCount(profileUser.getUserID())), "Following"));
 
         statsPanel.setBorder(BorderFactory.createEmptyBorder(25, 0, 10, 0));
         return statsPanel;
@@ -165,7 +166,12 @@ public class InstagramProfileUI extends TemplateUI {
                 InstagramProfileLogic.removeFollower(profileUser);
                 followButton.setText("Follow");
             }
-            refreshPanel();
+            try {
+                refreshPanel();
+            } catch (Exception e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
         });
 
         return followButton;
@@ -181,7 +187,12 @@ public class InstagramProfileUI extends TemplateUI {
 
         logoutButton.addActionListener(e -> {
             BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(this);
-            parentFrame.switchPanel(new SignInUI());
+            try {
+                parentFrame.switchPanel(new SignInUI());
+            } catch (Exception e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
         });
 
         return logoutButton;
@@ -228,8 +239,9 @@ public class InstagramProfileUI extends TemplateUI {
 
     /**
      * refreshes the page whenever a triggering action occurs
+     * @throws Exception 
      */
-    private void refreshPanel() {
+    private void refreshPanel() throws Exception {
         BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(this);
         parentFrame.switchPanel(new InstagramProfileUI(profileUser));
     }

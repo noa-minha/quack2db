@@ -1,11 +1,8 @@
 package Logic.Pages;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 
-import Logic.LogicClass;
 import Logic.TimeUtil;
 import ParameterClasses.User;
 import SQLManaging.DBManager;
@@ -13,7 +10,7 @@ import SQLManaging.DBManager;
 /**
  * Class that handles the logic of ShowPostUI
  */
-public class ShowPostLogic extends LogicClass{
+public class ShowPostLogic {
 
     /**
      * Calculates the time that passed since posting

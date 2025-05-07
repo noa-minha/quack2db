@@ -1,8 +1,6 @@
 package Logic.Pages;
 
-import Logic.LogicClass;
 import ParameterClasses.Notification;
-import TableManaging.DB;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,7 +10,7 @@ import java.util.function.Predicate;
 /**
  * Class that handles the logic of NotificationsUI
  */
-public class NotificationsLogic extends LogicClass {
+public class NotificationsLogic {
 
     /**
      * @return an ArrayList of all relevant notifications for the current user

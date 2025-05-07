@@ -11,8 +11,6 @@ import UI.Pages.*;
 import UI.BaseFrame;
 import javax.swing.*;
 
-import Logic.LogicClass;
-
 import java.awt.*;
 import java.util.List;
 
@@ -59,7 +57,12 @@ public class NavBar extends JPanel {
         switchButton.addActionListener(e -> {
             if(ui.getName().equals("Sign Up")){
                 BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(this);
-                parentFrame.switchPanel(new SignInUI());
+                try {
+                    parentFrame.switchPanel(new SignInUI());
+                } catch (Exception e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
             }
             else{
                 BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(this);
@@ -116,7 +119,12 @@ public class NavBar extends JPanel {
         homeButton = createIconButton("img/icons/home.png", "explore", ui);
         homeButton.addActionListener(e -> {
             BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(this);
-            parentFrame.switchPanel(new QuakstagramHomeUI());
+            try {
+                parentFrame.switchPanel(new QuakstagramHomeUI());
+            } catch (Exception e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
         });
         return homeButton;
     }
@@ -173,7 +181,12 @@ public class NavBar extends JPanel {
         notificationButton = createIconButton("img/icons/heart.png", "explore", ui);
         notificationButton.addActionListener(e -> {
             BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(this);
-            parentFrame.switchPanel(new NotificationsUI());
+            try {
+                parentFrame.switchPanel(new NotificationsUI());
+            } catch (Exception e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
         });
         return notificationButton;
     }
@@ -191,7 +204,12 @@ public class NavBar extends JPanel {
         profileButton.addActionListener(e -> {
             BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(this);
             List<User> user = DBManager.userTable.fetchRows("curr_user = " + 1);
-            parentFrame.switchPanel(new InstagramProfileUI(user.get(0)));
+            try {
+                parentFrame.switchPanel(new InstagramProfileUI(user.get(0)));
+            } catch (Exception e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
         });
         return profileButton;
     }

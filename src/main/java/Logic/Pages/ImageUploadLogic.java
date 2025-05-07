@@ -1,13 +1,12 @@
 package Logic.Pages;
 
-import Logic.LogicClass;
 import ParameterClasses.Post;
 import SQLManaging.DBManager;
 
 /**
  * Class that handles the logic of ImageUploadUI
  */
-public class ImageUploadLogic extends LogicClass{
+public class ImageUploadLogic{
 
     /**
      * Recieves a post pbject and saves it in the tables using the database

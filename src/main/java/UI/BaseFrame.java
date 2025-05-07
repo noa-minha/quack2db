@@ -64,7 +64,12 @@ public class BaseFrame extends JFrame {
      * Sets up the header panel, central panel, and navigation bar.
      */
     private void initializeFrame() {
-        centralPanel = new SignInUI();
+        try {
+            centralPanel = new SignInUI();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         headerPanel = new HeaderPanel(centralPanel);
         navBar = new NavBar(centralPanel);
 

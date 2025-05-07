@@ -23,9 +23,10 @@ public class SignInUI extends TemplateUI {
     /**
      * Default constructor.
      * Initializes the UI by calling the superclass constructor.
+     * @throws Exception 
      * @see TemplateUI
      */
-    public SignInUI() {
+    public SignInUI() throws Exception {
         super();
     }
 

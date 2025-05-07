@@ -1,6 +1,5 @@
 package Logic.Pages;
 
-import Logic.LogicClass;
 import ParameterClasses.*;
 import SQLManaging.DBManager;
 
@@ -10,7 +9,7 @@ import java.util.List;
 /**
  * Class that handles the logic of QuackstagramHomeUI
  */
-public class QuakstagramHomeLogic extends LogicClass {
+public class QuakstagramHomeLogic {
 
     /**
      * Like a given post (by the current user)

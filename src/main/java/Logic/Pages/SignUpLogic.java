@@ -1,6 +1,5 @@
 package Logic.Pages;
 
-import Logic.LogicClass;
 import ParameterClasses.User;
 import SQLManaging.DBManager;
 
@@ -9,7 +8,7 @@ import java.util.List;
 /**
  * Class that handles the logic of SignUpUI
  */
-public class SignUpLogic extends LogicClass{
+public class SignUpLogic {
 
     /**
      * Signs up the new user

@@ -3,7 +3,6 @@ package Logic.Panels;
 import java.util.ArrayList;
 import java.util.List;
 
-import Logic.LogicClass;
 import ParameterClasses.Post;
 import ParameterClasses.User;
 import SQLManaging.DBManager;
@@ -11,7 +10,7 @@ import SQLManaging.DBManager;
 /**
  * Class that handles the logic of GridPanelUI
  */
-public class GridPanelLogic extends LogicClass {
+public class GridPanelLogic {
 
     /**
      * Recieve all the posts from the given user

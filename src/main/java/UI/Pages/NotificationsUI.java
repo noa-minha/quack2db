@@ -22,9 +22,10 @@ public class NotificationsUI extends TemplateUI {
     /**
      * Default constructor.
      * Initializes the UI by calling the superclass constructor.
+     * @throws Exception 
      * @see TemplateUI
      */
-    public NotificationsUI() {
+    public NotificationsUI() throws Exception {
         super();
     }
 

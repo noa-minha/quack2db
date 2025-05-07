@@ -13,7 +13,6 @@ import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import Logic.LogicClass;
 import Logic.Pages.ShowPostLogic;
 import ParameterClasses.Post;
 import ParameterClasses.User;
@@ -37,9 +36,10 @@ public class ShowPost extends TemplateUI {
     /**
      * Default constructor that takes a post for display.
      * Initializes the UI by calling the superclass constructor.
+     * @throws Exception 
      * @see TemplateUI
      */
-    public ShowPost(Post post) {
+    public ShowPost(Post post) throws Exception {
         super();
         this.post = post;
     }
@@ -95,7 +95,12 @@ public class ShowPost extends TemplateUI {
      */
     private void navigateToHome() {
         BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(this);
-        parentFrame.switchPanel(new QuakstagramHomeUI());
+        try {
+            parentFrame.switchPanel(new QuakstagramHomeUI());
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     /**

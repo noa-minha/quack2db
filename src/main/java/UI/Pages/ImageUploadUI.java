@@ -1,6 +1,5 @@
 package UI.Pages;
 
-import Logic.LogicClass;
 import Logic.Pages.ImageUploadLogic;
 import ParameterClasses.Post;
 import ParameterClasses.User;
@@ -169,7 +168,12 @@ public class ImageUploadUI extends TemplateUI {
         BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(this);
         List<User> user = DBManager.userTable.fetchRows("curr_user = " + 1);
         User curruser =  user.get(0);
-        parentFrame.switchPanel(new InstagramProfileUI(curruser));
+        try {
+            parentFrame.switchPanel(new InstagramProfileUI(curruser));
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     /**
