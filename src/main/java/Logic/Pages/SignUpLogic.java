@@ -2,6 +2,9 @@ package Logic.Pages;
 
 import Logic.LogicClass;
 import ParameterClasses.User;
+import SQLManaging.DBManager;
+
+import java.util.List;
 
 /**
  * Class that handles the logic of SignUpUI
@@ -15,7 +18,8 @@ public class SignUpLogic extends LogicClass{
      */
     public static void signUpUser(User newUser) throws Exception{
         String username = newUser.getUsername();
-        if (userExists(getUser(username))){
+        List<User> user = DBManager.userTable.fetchRows("username = "+username);
+        if (user.size()>0){
             throw new Exception("Username already exists, choose a different one.");
         }
         addUser(newUser);
@@ -28,13 +32,8 @@ public class SignUpLogic extends LogicClass{
      * Adds the new user to all relevant tables
      */
     private static void addUser(User user) {
-        
         // adds user to USERS table
-        DB.USERS.insertRow(user, true);
-
-        // creates a new empty following object and adds it to the FOLLOWING table
-        Following userFollowing = new Following(user.getUsername());
-        DB.FOLLOWING.insertRow(userFollowing, true);
+        DBManager.userTable.insert(user);
     }
 
 }
