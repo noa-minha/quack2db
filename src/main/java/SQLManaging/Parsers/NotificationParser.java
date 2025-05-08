@@ -20,7 +20,7 @@ public class NotificationParser implements Parser<Notification> {
     public Notification parseRow(ResultSet rs) throws SQLException {
         String username = rs.getString("username");
         int userID = rs.getInt("user_id");
-        String action = rs.getString("action");
+        String action = rs.getString("interaction_type");
   
         Notification n = new Notification(username, userID, action);
         return n;

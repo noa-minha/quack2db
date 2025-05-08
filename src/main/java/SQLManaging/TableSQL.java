@@ -8,6 +8,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import ParameterClasses.Notification;
+import SQLManaging.Parsers.NotificationParser;
 import SQLManaging.Parsers.Parser;
 
 // TODO : delete main
@@ -36,6 +39,7 @@ public class TableSQL<T> implements Table<T>{
         System.out.println(sql);
         try (Statement stmt = connection.createStatement()) {
             ResultSet rs = stmt.executeQuery(sql);
+
             while (rs.next()) {
                 resultList.add(parser.parseRow(rs));  // Using the parser to convert each row into a User object
             }
@@ -84,7 +88,13 @@ public class TableSQL<T> implements Table<T>{
     }
 
     public static void main(String[] args) {
-    //     Connection conn = DBManager.init().getConnection();
+        Connection conn = DBManager.init().getConnection();
+        Table<Notification> notificationTable = new TableSQL<>(conn, "notifications", new NotificationParser());
+
+        List<Notification> n = notificationTable.fetchRows(null);
+        for (Notification noti : n) {
+            System.out.println("Found: " + n.toString());
+        }
     //     TableSQL<User> userTable = new TableSQL<>(conn, "users", new UserParser());
 
     //     // User newUser = new User(0, "alice", "secure123", "Loves cats", "img/users/alice.png");

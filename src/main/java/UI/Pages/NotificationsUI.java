@@ -1,7 +1,7 @@
 package UI.Pages;
 
-import Logic.Pages.NotificationsLogic;
 import ParameterClasses.Notification;
+import SQLManaging.DBManager;
 import UI.TemplateUI;
 
 import javax.swing.*;
@@ -42,7 +42,7 @@ public class NotificationsUI extends TemplateUI {
         
 
         //get all notifications for this user
-        notifications = NotificationsLogic.fetchNotifications();
+        notifications = DBManager.notificationTable.fetchRows(null);
 
         if (notifications.size() > 0){
             for (Notification notification : notifications){
@@ -50,12 +50,17 @@ public class NotificationsUI extends TemplateUI {
                 JLabel notificationLabel = new JLabel(notificationMessage);
                 contentPanel.add(notificationLabel);
             }
-            scrollPane = new JScrollPane(contentPanel);
-            scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-            scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-            add(scrollPane, BorderLayout.CENTER);
-
         }
+        else{
+            JLabel notificationLabel = new JLabel("No notifications", SwingConstants.CENTER);
+            notificationLabel.setFont(new Font("Arial", Font.BOLD, 16));
+            contentPanel.add(notificationLabel);
+        }
+        scrollPane = new JScrollPane(contentPanel);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        add(scrollPane, BorderLayout.CENTER);
+        
 
     }
         
