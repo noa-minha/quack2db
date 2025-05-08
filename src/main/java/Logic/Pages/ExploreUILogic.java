@@ -15,13 +15,13 @@ public class ExploreUILogic {
      * Searches for a user given a String username
      * @return the user if found or throws an exception saying a user was not found.
      */
-    public static User performSearch(String searchedUsername) throws Exception{
-        List<User> user = DBManager.userTable.fetchRows("user_id = " + searchedUsername);
-        if(user.size() == 0){
-            throw new Exception("No user found.");
-        }
-        return user.get(0);
-    }
+    // public static User performSearch(String searchedUsername) throws Exception{
+    //     List<User> user = DBManager.userTable.fetchRows("user_name = '" + searchedUsername + "'");
+    //     if(user.size() == 0){
+    //         throw new Exception("No user found.");
+    //     }
+    //     return user.get(0);
+    // }
 
     public static List<Post> fetchPosts() {
         return DBManager.exploreTable.fetchRows(null);

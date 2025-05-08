@@ -74,42 +74,42 @@ public class ExploreUI extends TemplateUI {
     private JPanel createMainContentPanel() {
         // Create the main content panel with search and image grid
         // Search bar at the top
-        JPanel searchPanel = new JPanel(new BorderLayout());
-        JTextField searchField = new JTextField(" Search Users");
-        searchField.setForeground(Color.GRAY); // Placeholder text color
+        // JPanel searchPanel = new JPanel(new BorderLayout());
+        // JTextField searchField = new JTextField(" Search Users");
+        // searchField.setForeground(Color.GRAY); // Placeholder text color
 
-        searchField.addFocusListener(new java.awt.event.FocusListener() {
-            @Override
-            public void focusGained(java.awt.event.FocusEvent e) {
-                if (searchField.getText().equals(" Search Users")) {
-                    searchField.setText("");
-                    searchField.setForeground(Color.BLACK); // Normal text color
-                }
-            }
+        // searchField.addFocusListener(new java.awt.event.FocusListener() {
+        //     @Override
+        //     public void focusGained(java.awt.event.FocusEvent e) {
+        //         if (searchField.getText().equals(" Search Users")) {
+        //             searchField.setText("");
+        //             searchField.setForeground(Color.BLACK); // Normal text color
+        //         }
+        //     }
 
-            @Override
-            public void focusLost(java.awt.event.FocusEvent e) {
-                if (searchField.getText().trim().isEmpty()) {
-                    searchField.setText(" Search Users");
-                    searchField.setForeground(Color.GRAY); // Reset placeholder color
-                }
-            }
-        });
+        //     @Override
+        //     public void focusLost(java.awt.event.FocusEvent e) {
+        //         if (searchField.getText().trim().isEmpty()) {
+        //             searchField.setText(" Search Users");
+        //             searchField.setForeground(Color.GRAY); // Reset placeholder color
+        //         }
+        //     }
+        // });
 
-        searchField.addActionListener(e -> {
-            String searchText = searchField.getText().trim();
-            if (!searchText.isEmpty()) {
-                try {
-                    User user = ExploreUILogic.performSearch(searchText);
-                    BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(this);
-                    parentFrame.switchPanel(new InstagramProfileUI(user));
-                } catch (Exception exception){
-                    showError(exception.getMessage());
-                }
-            }
-        });
-        searchPanel.add(searchField, BorderLayout.CENTER);
-        searchPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, searchField.getPreferredSize().height)); // Limit the height
+        // searchField.addActionListener(e -> {
+        //     String searchText = searchField.getText().trim();
+        //     if (!searchText.isEmpty()) {
+        //         try {
+        //             User user = ExploreUILogic.performSearch(searchText);
+        //             BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(this);
+        //             parentFrame.switchPanel(new InstagramProfileUI(user));
+        //         } catch (Exception exception){
+        //             showError(exception.getMessage());
+        //         }
+        //     }
+        // });
+        // searchPanel.add(searchField, BorderLayout.CENTER);
+        // searchPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, searchField.getPreferredSize().height)); // Limit the height
 
         // Post Grid
         GridPanel postGridPanel = new GridPanel(ExploreUILogic.fetchPosts()); // fix? maybe add view?
@@ -118,7 +118,7 @@ public class ExploreUI extends TemplateUI {
         // Main content panel that holds both the search bar and the image grid
         JPanel mainContentPanel = new JPanel();
         mainContentPanel.setLayout(new BoxLayout(mainContentPanel, BoxLayout.Y_AXIS));
-        mainContentPanel.add(searchPanel);
+        // mainContentPanel.add(searchPanel);
         mainContentPanel.add(postGridPanel);
         return mainContentPanel;
     }
