@@ -2,8 +2,7 @@ package Logic.Pages;
 
 import java.util.List;
 
-import ParameterClasses.Follow;
-import ParameterClasses.User;
+import ParameterClasses.*;
 import SQLManaging.DBManager;
 
 
@@ -77,5 +76,16 @@ public class InstagramProfileLogic {
     public static int getPostsCount(int userID) {
         String func = "count_posts(" + userID + ")";
         return DBManager.runFunc(func);
+    }
+
+    public static List<Post> getAllPosts(User profileUser) {
+        if (profileUser == null){
+            // if user == current user
+            List<User> user = DBManager.userTable.fetchRows("curr_user = " + 1);
+            profileUser = user.get(0);
+        }
+        int user_id = profileUser.getUserID();
+        List<Post> posts = DBManager.postTable.fetchRows("user_id = " + user_id);
+        return posts;
     }
 }

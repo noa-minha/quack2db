@@ -112,8 +112,7 @@ public class ExploreUI extends TemplateUI {
         searchPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, searchField.getPreferredSize().height)); // Limit the height
 
         // Post Grid
-        User nullUser = null;
-        GridPanel postGridPanel = new GridPanel(nullUser);
+        GridPanel postGridPanel = new GridPanel(ExploreUILogic.fetchPosts()); // fix? maybe add view?
 
 
         // Main content panel that holds both the search bar and the image grid

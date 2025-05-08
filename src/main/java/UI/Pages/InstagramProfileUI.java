@@ -7,9 +7,11 @@ import UI.TemplateUI;
 import javax.swing.*;
 
 import Logic.Pages.InstagramProfileLogic;
+import ParameterClasses.Post;
 import ParameterClasses.User;
 
 import java.awt.*;
+import java.util.List;
 
 /**
  * InstagramProfileUI is the class that creates the profile page in the main app.
@@ -62,7 +64,8 @@ public class InstagramProfileUI extends TemplateUI {
     @Override
     public void initializeUI(){
         // Initialize the image grid
-        GridPanel gridPanel = new GridPanel(profileUser);
+        List<Post> posts = InstagramProfileLogic.getAllPosts(profileUser);
+        GridPanel gridPanel = new GridPanel(posts);
         add(gridPanel);
         revalidate();
         repaint();

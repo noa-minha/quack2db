@@ -21,6 +21,8 @@ public class DBManager {
     public static TableSQL<Like> likeTable;
     public static TableSQL<Follow> followTable ;
     public static TableSQL<Notification> notificationTable;
+    public static TableSQL<Post> exploreTable;
+
 
 
     private static DBManager instance;
@@ -36,6 +38,7 @@ public class DBManager {
             likeTable = new TableSQL<>(connection, "likes", new LikeParser());
             followTable = new TableSQL<>(connection, "follows", new FollowParser());
             notificationTable = new TableSQL<>(connection, "notifications", new NotificationParser());
+            exploreTable = new TableSQL<>(connection, "feed_posts", new PostParser());
 
         } catch (SQLException e) {
             e.printStackTrace();

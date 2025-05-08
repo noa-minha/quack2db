@@ -1,5 +1,6 @@
 package Logic.Pages;
 
+import ParameterClasses.Post;
 import ParameterClasses.User;
 import SQLManaging.DBManager;
 
@@ -20,5 +21,9 @@ public class ExploreUILogic {
             throw new Exception("No user found.");
         }
         return user.get(0);
+    }
+
+    public static List<Post> fetchPosts() {
+        return DBManager.exploreTable.fetchRows(null);
     }
 }

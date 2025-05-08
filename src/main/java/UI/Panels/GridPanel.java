@@ -1,9 +1,7 @@
 package UI.Panels;
 
 import javax.swing.*;
-import Logic.Panels.GridPanelLogic;
 import ParameterClasses.Post;
-import ParameterClasses.User;
 import UI.Pages.ShowPost;
 import UI.BaseFrame;
 import java.awt.*;
@@ -24,7 +22,7 @@ public class GridPanel extends JPanel {
      * The class is being initialized with the wanted user whos posts are for display
      * @param user - can be a specific user or null - which means all users
      */
-    public GridPanel(User user){
+    public GridPanel(List<Post> posts){
         setLayout(new BorderLayout());
 
         // Use FlowLayout with LEFT alignment to ensure items start from top-left
@@ -40,7 +38,7 @@ public class GridPanel extends JPanel {
 
         add(scrollPane, BorderLayout.CENTER);
 
-        posts = GridPanelLogic.fetchAllPosts(user);
+        this.posts = posts;
         
         loadPosts();
     }
