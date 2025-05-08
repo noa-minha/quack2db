@@ -88,4 +88,9 @@ public class InstagramProfileLogic {
         List<Post> posts = DBManager.postTable.fetchRows("user_id = " + user_id);
         return posts;
     }
+
+    public static void logout() {
+        String setClause = "curr_user = 0";
+        DBManager.userTable.update(setClause);
+    }
 }

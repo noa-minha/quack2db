@@ -191,13 +191,9 @@ public class InstagramProfileUI extends TemplateUI {
         styleActionButton(logoutButton, new Color(225, 80, 80), Color.WHITE);
 
         logoutButton.addActionListener(e -> {
+            InstagramProfileLogic.logout();
             BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(this);
-            try {
-                parentFrame.switchPanel(new SignInUI());
-            } catch (Exception e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
+            parentFrame.switchPanel(new SignInUI());
         });
 
         return logoutButton;
