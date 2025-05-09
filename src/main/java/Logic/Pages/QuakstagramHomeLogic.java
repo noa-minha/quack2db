@@ -79,7 +79,7 @@ public class QuakstagramHomeLogic {
         List<User> user = DBManager.userTable.fetchRows("curr_user = " + 1);
         int user_id = user.get(0).getUserID();
         List<Like> likedPost = DBManager.likeTable.fetchRows("post_id = " + post.getPostID() + ",user_id = " + user_id);
-        if (likedPost == null) return false;
+        if (likedPost.size()==0) return false;
         else return true;
     }
 
