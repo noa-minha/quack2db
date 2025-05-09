@@ -1,9 +1,9 @@
 package Logic.Pages;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
-
-import Logic.TimeUtil;
 import ParameterClasses.User;
 import SQLManaging.DBManager;
 
@@ -16,8 +16,20 @@ public class ShowPostLogic {
      * Calculates the time that passed since posting
      * @return a stylized time string
      */
-    public static String calculateTimeSincePosting(LocalDateTime postTime) {
-        return TimeUtil.getTimeSince(postTime);
+    public static String getTimeSince(LocalDateTime pastTime) {
+        LocalDateTime now = LocalDateTime.now();
+        Duration duration = Duration.between(pastTime, now);
+
+        long seconds = duration.getSeconds();
+        long minutes = seconds / 60;
+        long hours = minutes / 60;
+        long days = hours / 24;
+
+        if (days >= 7) return pastTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        if (days > 0) return days + " day" + (days > 1 ? "s" : "") + " ago";
+        if (hours > 0) return hours + " hour" + (hours > 1 ? "s" : "") + " ago";
+        if (minutes > 0) return minutes + " minute" + (minutes > 1 ? "s" : "") + " ago";
+        return "Just now";
     }
 
     /**
