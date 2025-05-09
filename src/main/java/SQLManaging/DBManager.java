@@ -22,6 +22,7 @@ public class DBManager {
     public static TableSQL<Follow> followTable ;
     public static TableSQL<Notification> notificationTable;
     public static TableSQL<Post> exploreTable;
+    public static TableSQL<Post> homeTable;
 
 
 
@@ -39,6 +40,8 @@ public class DBManager {
             followTable = new TableSQL<>(connection, "follows", new FollowParser());
             notificationTable = new TableSQL<>(connection, "notifications", new NotificationParser());
             exploreTable = new TableSQL<>(connection, "feed_posts", new PostParser());
+            homeTable = new TableSQL<>(connection, "following_posts", new PostParser());
+
 
         } catch (SQLException e) {
             e.printStackTrace();

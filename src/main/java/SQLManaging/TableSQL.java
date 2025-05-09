@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import ParameterClasses.*;
-import SQLManaging.Parsers.NotificationParser;
 import SQLManaging.Parsers.Parser;
 import SQLManaging.Parsers.PostParser;
 

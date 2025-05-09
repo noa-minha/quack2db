@@ -59,7 +59,7 @@ public class QuakstagramHomeUI extends TemplateUI {
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         // Fetch data and populate content
-        ArrayList<Post> followingPosts = QuakstagramHomeLogic.getAllFollowingPosts();
+        List<Post> followingPosts = QuakstagramHomeLogic.getAllFollowingPosts();
 
         // Populate after setting layout but before adding to parent
         populateContentPanel(contentPanel, followingPosts);
@@ -81,7 +81,7 @@ public class QuakstagramHomeUI extends TemplateUI {
     /**
      * Populates the content panel with posts or shows a message if no posts exist
      */
-    private void populateContentPanel(JPanel panel, ArrayList<Post> followingPosts) {
+    private void populateContentPanel(JPanel panel, List<Post> followingPosts) {
         if (followingPosts.isEmpty()) {
             showNoPostsMessage(panel);
             return;
