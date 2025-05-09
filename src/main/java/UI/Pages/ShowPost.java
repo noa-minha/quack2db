@@ -40,9 +40,9 @@ public class ShowPost extends TemplateUI {
      * @see TemplateUI
      */
     public ShowPost(Post post){
-        // super();
+        super();
         this.post = post;
-        System.out.println(post);
+        initializeUI();
     }
 
     /**
@@ -60,10 +60,13 @@ public class ShowPost extends TemplateUI {
      */
     @Override
     public void initializeUI() {
-        JPanel mainContentPanel = createMainContentPanel();
-        add(mainContentPanel);
-        revalidate();
-        repaint();
+        if(post!=null) {
+            JPanel mainContentPanel = createMainContentPanel();
+            System.out.println("created main content panel");
+            add(mainContentPanel);
+            revalidate();
+            repaint();
+        }
     }
 
     /**
