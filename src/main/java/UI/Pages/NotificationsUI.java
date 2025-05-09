@@ -29,6 +29,7 @@ public class NotificationsUI extends TemplateUI {
         super();
     }
 
+
     /**
      * Initializes the UI components.
      * This method is called from the TemplateUI parent class during construction.
@@ -60,8 +61,6 @@ public class NotificationsUI extends TemplateUI {
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         add(scrollPane, BorderLayout.CENTER);
-        
-
     }
         
 

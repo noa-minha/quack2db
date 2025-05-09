@@ -13,18 +13,11 @@ public class User{
     private String password;
     private String bio;
     private String profilePicPath;
-    // TODO : do we need these?
-    // TODO:change comments
     private boolean currentUser;
-    // private DateTime createdAt;
 
 
     /**
      * Constructor for User object
-     * @param username
-     * @param password
-     * @param bio
-     * @param profilePicPath
      */
 
     public User(int userID, String username, String password, String bio, String profilePicPath, boolean currUser){
@@ -52,7 +45,6 @@ public class User{
     public boolean isCurrUser() {return currentUser; }
 
 
-    // TODO: is needed? delete?
     /**
      * Checks whether a given password is the user's password
      * @param password
@@ -65,14 +57,6 @@ public class User{
         return false;
     }
 
-    // /**
-    //  * Returns all relevant information in a csv format
-    //  */
-    // @Override
-    // public String toString() {
-    //     return userID + "," +username + "," + password + "," + bio + "," + profilePicPath;
-    // }
-
 
     @Override
     public boolean equals(Object obj) {
@@ -82,7 +66,5 @@ public class User{
         }
         return false;
     }
-
-    //getPrimaryKey? TODO
 
 }
