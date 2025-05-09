@@ -26,6 +26,26 @@ images with captions.
    git remote set-url origin github_username/repo_name
    git remote -v # confirm the changes
 ```
+### Database Setup
+
+Quackstagram uses a MySQL database named `quackstagram_db` to store all user, post, like, follow, and notification data.
+
+1. **Create the database**  
+   Open MySQL Workbench (or your preferred MySQL tool) and run:
+   ```sql
+   CREATE DATABASE quackstagram_db;
+   ```
+
+2. **Run SQL files**  
+   Then run any provided .sql files (schema, views, stored procedures) against quackstagram_db.
+
+3. **Configure the connection**  
+   In src/SQLManaging/DBManager.java, update credentials if needed:
+   ```java
+   private static String url = "jdbc:mysql://localhost:3306/quackstagram_db";
+   private static String username = "root";
+   private static String password = "1234";
+   ```
 
 
 ## Usage:
@@ -66,15 +86,6 @@ On the immediate right of the "Upload Image" button in the navigation bar is the
 The rightmost icon in the navigation bar is the button you use to navigate to the "Your profile" page. This page is used to keep track of how many people are following you, how many you follow and how many posts you have. This also gives you an overview of your posted images. From this page you can navigate to the "showPost" page by selecting one of your posts. You can also use this page to log out of your account.
 
     ![yourprof][yourprof]
-
-
-## Contact:
-If you need help or have questions, suggestions or just general feedback, you can follow the contact details below. (he is available 24/7 on WhatsApp)
-
-David Jiménez Lorenzo - +34 689 90 97 63
-
-## Acknowledgements
-Thank you to all our fans who have supported us from the beginning and to Shaked, Noa, David and Jake for making this beautiful app.
 
 <!-- Images -->
 [navbarHomepage]: readmepics/navbarHomePage.png
