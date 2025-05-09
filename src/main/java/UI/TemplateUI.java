@@ -1,11 +1,8 @@
 package UI;
 
 import javax.swing.*;
-import ParameterClasses.User;
-import SQLManaging.DBManager;
 
 import java.awt.*;
-import java.util.List;
 
 /**
  * An abstract template class that serves as the foundation for all UI panels in the app.
@@ -14,19 +11,12 @@ import java.util.List;
  */
 public abstract class TemplateUI extends JPanel {
     /**
-     * The current user of the application
-     */
-    // protected User user;
-
-    /**
      * Constructs a new TemplateUI with standard constructor.
      * Sets up the panel with BorderLayout, retrieves the current user,
      * configures visual properties, and calls the abstract initializeUI method
      * which must be implemented by subclasses.
      */
     public TemplateUI() {
-        // List<User> user = DBManager.userTable.fetchRows("curr_user = " + 1);
-        // this.user = user.get(0);
         setLayout(new BorderLayout());
         setOpaque(true);
         setPreferredSize(new Dimension(300, 400));
