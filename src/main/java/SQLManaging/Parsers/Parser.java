@@ -11,26 +11,30 @@ import java.util.List;
 public interface Parser<T> {
 
     /**
-     * Populates a parameter object from a PreparedStatement (e.g., after executing a SELECT query).
-     * Note: In practice, you'd usually use a ResultSet here, not a PreparedStatement.
-     *
-     * @param stmt the PreparedStatement (or ResultSet) containing the query results
-     * @return the parameter object created from the row
+     * Populates a parameter object from a PreparedStatement 
+     * @param resultSet - the ResultSet containing the query results
+     * @return item of type T (some object from parameter classes)
      */
     public T parseRow(ResultSet resultSet) throws SQLException;
 
     /**
-     * Populates a PreparedStatement with values from a parameter object (e.g., for INSERT/UPDATE).
-     *
+     * Populates a PreparedStatement with values from a parameter object
      * @param stmt the PreparedStatement to populate
      * @param row the object to use for setting parameters
      */
     public void toPreparedStatement(PreparedStatement stmt, T row) throws SQLException;
 
-    // Returns the columns for the INSERT SQL statement (comma-separated)
+    /**
+     * returns the cols of the table for the insert statement (e.g., "username, bio, passwrd, profile_pic_path")
+     * @return
+     */
     String getColumns();
 
     // Returns the placeholders for the INSERT SQL statement (e.g., "?, ?, ?, ?")
+    /**
+     * 
+     * @return
+     */
     String getPlaceholders();
 
     // Returns the column name for the unique identifier for DELETE
