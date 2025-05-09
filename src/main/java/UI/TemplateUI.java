@@ -1,11 +1,8 @@
 package UI;
 
 import javax.swing.*;
-import ParameterClasses.User;
-import SQLManaging.DBManager;
 
 import java.awt.*;
-import java.util.List;
 
 /**
  * An abstract template class that serves as the foundation for all UI panels in the app.

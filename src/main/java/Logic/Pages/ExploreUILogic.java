@@ -1,7 +1,6 @@
 package Logic.Pages;
 
 import ParameterClasses.Post;
-import ParameterClasses.User;
 import SQLManaging.DBManager;
 
 import java.util.List;

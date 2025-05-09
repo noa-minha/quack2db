@@ -2,11 +2,7 @@ package UI.Panels;
 
 import javax.swing.*;
 import ParameterClasses.Post;
-import UI.Pages.ShowPost;
-import UI.BaseFrame;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.List;
 
 
