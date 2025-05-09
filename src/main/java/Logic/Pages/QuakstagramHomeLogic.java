@@ -3,7 +3,6 @@ package Logic.Pages;
 import ParameterClasses.*;
 import SQLManaging.DBManager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -45,28 +44,9 @@ public class QuakstagramHomeLogic {
     }
 
     /**
-     * Recieves a Following object of all the users the current user is following
-     */
-    // private static List<Follow> getFollowingOfCurrUser() {
-    //     List<User> user = DBManager.userTable.fetchRows("curr_user = " + 1);
-    //     int user_id = user.get(0).getUserID();
-    //     //TODO - MAKE SURE THE ATTRIBUTE NAME IS CORRECT
-    //     List<Follow> followingList = DBManager.followTable.fetchRows("followerID = " + user_id);
-    //     return followingList;
-    // }
-
-    /**
      * Fetches all the posts of all the users that the current user is following
      */
     public static List<Post> getAllFollowingPosts() {
-        // List<Follow> followingUsers = getFollowingOfCurrUser();
-        // ArrayList<Post> posts = new ArrayList<>();
-
-        // for (Follow follow : followingUsers) {
-        //     List<Post> followingPosts = DBManager.postTable.fetchRows("user_id = " + follow.getFolloweeID());
-        //     posts.addAll(followingPosts);
-        // }
-        // return posts;
         return DBManager.homeTable.fetchRows(null);
     }
 
@@ -83,6 +63,10 @@ public class QuakstagramHomeLogic {
         else return true;
     }
 
+    /**
+     * @param postID uniquely identifies a post
+     * @return the number of likes for this post
+     */
     public static int getLikesCount(int postID) {
         String func = "count_likes(" + postID + ")";
         return DBManager.runFunc(func);
