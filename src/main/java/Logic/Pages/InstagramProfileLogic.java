@@ -29,15 +29,12 @@ public class InstagramProfileLogic {
      */
     public static boolean isCurrUsersFollowing(User profileUser) {
         List<User> user = DBManager.userTable.fetchRows("curr_user = " + 1);
-
         User loggedInUser = user.get(0);
-        // System.out.println(loggedInUser.getUsername());
         List<Follow> following = DBManager.followTable.fetchRows("follower_id= " + loggedInUser.getUserID() + " AND following_id= " + profileUser.getUserID());
         if (!following.isEmpty()) {
             System.out.println("is following");
             return true;
         }
-        System.out.println("not following");
         return false;
     }
 
@@ -66,21 +63,39 @@ public class InstagramProfileLogic {
         }
     }
 
+    /**
+     * returns the number of users following a user
+     * @param userID the number uniquely identifies a user
+     * @return the number of users following a user
+     */
     public static int getFollowersCount(int userID) {
         String func = "count_followers(" + userID + ")";
         return DBManager.runFunc(func);
     }
-
+    /**
+     * returns the number of users a user follows
+     * @param userID the number uniquely identifies a user
+     * @return the number of users a user follows
+     */
     public static int getFollowingCount(int userID) {
         String func = "count_following(" + userID + ")";
         return DBManager.runFunc(func);
     }
 
+    /**
+     * returns the number of posts a user owns
+     * @param userID the number uniquely identifies a user
+     * @return the number of posts a user owns
+     */
     public static int getPostsCount(int userID) {
         String func = "count_posts(" + userID + ")";
         return DBManager.runFunc(func);
     }
 
+    /**
+     * @param profileUser  a user whos posts being fetched
+     * @return the posts of a user
+     */
     public static List<Post> getAllPosts(User profileUser) {
         if (profileUser == null){
             // if user == current user
@@ -92,6 +107,9 @@ public class InstagramProfileLogic {
         return posts;
     }
 
+    /**
+     * logs out for the current user
+     */
     public static void logout() {
         String setClause = "curr_user = 0";
         DBManager.userTable.update(setClause);
