@@ -40,7 +40,7 @@ public class FollowParser implements Parser<Follow>{
 
     @Override
     public List<String> getUniqueIdentifierColumns() {
-        return List.of("follower_id", "followee_id");
+        return List.of("follower_id", "following_id");
     }
 
     @Override
