@@ -10,19 +10,10 @@ import java.util.List;
  * Class that handles the logic of ExploreUI
  */
 public class ExploreUILogic {
-
     /**
-     * Searches for a user given a String username
-     * @return the user if found or throws an exception saying a user was not found.
+     * fetches the explore page posts for display based on views from the database
+     * @return a list of popular posts
      */
-    // public static User performSearch(String searchedUsername) throws Exception{
-    //     List<User> user = DBManager.userTable.fetchRows("user_name = '" + searchedUsername + "'");
-    //     if(user.size() == 0){
-    //         throw new Exception("No user found.");
-    //     }
-    //     return user.get(0);
-    // }
-
     public static List<Post> fetchPosts() {
         return DBManager.exploreTable.fetchRows(null);
     }
