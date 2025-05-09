@@ -41,6 +41,7 @@ public class InstagramProfileUI extends TemplateUI {
     public InstagramProfileUI(User profileUser){
         super();                                                        
         this.profileUser = profileUser;
+        initializeUI();
         contentPanel = new JPanel();
         headerPanel = createHeaderPanel();       // Initialize header panel
     }
@@ -63,12 +64,14 @@ public class InstagramProfileUI extends TemplateUI {
      */
     @Override
     public void initializeUI(){
-        // Initialize the image grid
-        List<Post> posts = InstagramProfileLogic.getAllPosts(profileUser);
-        GridPanel gridPanel = new GridPanel(posts);
-        add(gridPanel);
-        revalidate();
-        repaint();
+        if(profileUser!=null) {
+            // Initialize the image grid
+            List<Post> posts = InstagramProfileLogic.getAllPosts(profileUser);
+            GridPanel gridPanel = new GridPanel(posts);
+            add(gridPanel);
+            revalidate();
+            repaint();
+        }
     }
 
     /**
