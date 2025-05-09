@@ -1,6 +1,5 @@
 package UI.Pages;
 
-import Logic.Pages.ImageUploadLogic;
 import ParameterClasses.Post;
 import ParameterClasses.User;
 import SQLManaging.DBManager;
@@ -165,7 +164,7 @@ public class ImageUploadUI extends TemplateUI {
         List<User> user = DBManager.userTable.fetchRows("curr_user = " + 1);
         User curruser =  user.get(0);
         Post post = new Post(0,curruser.getUserID(), imagePath, captionText, null);
-        ImageUploadLogic.saveImage(post);
+        DBManager.postTable.insert(post);
         JOptionPane.showMessageDialog(this, "Image successfully saved!");
         BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(this);
         parentFrame.switchPanel(new InstagramProfileUI(curruser));
