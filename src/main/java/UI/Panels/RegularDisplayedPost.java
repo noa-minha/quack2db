@@ -40,19 +40,19 @@ public class RegularDisplayedPost extends JPanel {
         loadPostImage(post.getImgPath());
 
         // Add mouse listener to detect clicks on the panel (image area)
-        // addMouseListener(new MouseAdapter() {
-        //     @Override
-        //     public void mouseClicked(MouseEvent e) {
-        //         // Perform action when image is clicked
-        //         BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(RegularDisplayedPost.this);
-        //         try {
-        //             parentFrame.switchPanel(new ShowPost(post));
-        //         } catch (Exception e1) {
-        //             // TODO Auto-generated catch block
-        //             e1.printStackTrace();
-        //         }
-        //     }
-        // });
+         addMouseListener(new MouseAdapter() {
+             @Override
+             public void mouseClicked(MouseEvent e) {
+                 // Perform action when image is clicked
+                 BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(RegularDisplayedPost.this);
+                 try {
+                     parentFrame.switchPanel(new ShowPost(post));
+                 } catch (Exception e1) {
+                     // TODO Auto-generated catch block
+                     e1.printStackTrace();
+                 }
+             }
+         });
     }
 
     /**

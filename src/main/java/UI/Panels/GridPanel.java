@@ -75,19 +75,8 @@ public class GridPanel extends JPanel {
                 JPanel postContainer = new JPanel();
                 postContainer.setPreferredSize(new Dimension(90, 90));
                 postContainer.setLayout(new BorderLayout());
-                
 
                 JPanel postPanel = new RegularDisplayedPost(post, 80, 80);
-                postPanel.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        // System.out.println(postPanel);
-                        // BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(postPanel);
-                        // parentFrame.switchPanel(new ShowPost(post));
-                        System.out.println("Opening post: " + post.getPostID() + ", path: " + post.getImgPath());
-                        ShowPost shPost = new ShowPost(post);
-                    }
-                });
 
                 postContainer.add(postPanel, BorderLayout.CENTER);
                 gridWrapper.add(postContainer);
