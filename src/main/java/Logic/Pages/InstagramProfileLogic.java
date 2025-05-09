@@ -31,10 +31,13 @@ public class InstagramProfileLogic {
         List<User> user = DBManager.userTable.fetchRows("curr_user = " + 1);
 
         User loggedInUser = user.get(0);
-        List<Follow> following = DBManager.followTable.fetchRows("follower_id= " + loggedInUser.getUserID() + " , followee_id= " + profileUser.getUserID());
-        if (following != null) {
+        // System.out.println(loggedInUser.getUsername());
+        List<Follow> following = DBManager.followTable.fetchRows("follower_id= " + loggedInUser.getUserID() + " AND following_id= " + profileUser.getUserID());
+        if (!following.isEmpty()) {
+            System.out.println("is following");
             return true;
         }
+        System.out.println("not following");
         return false;
     }
 
@@ -57,8 +60,8 @@ public class InstagramProfileLogic {
     public static void removeFollower(User profileUser) {
         List<User> user = DBManager.userTable.fetchRows("curr_user = " + 1);
         User currUser = user.get(0);
-        List<Follow> following = DBManager.followTable.fetchRows("follower_id= " + currUser.getUserID() + " , followee_id= " + profileUser.getUserID());
-        if (following != null) {
+        List<Follow> following = DBManager.followTable.fetchRows("follower_id= " + currUser.getUserID() + " , following_id= " + profileUser.getUserID());
+        if (!following.isEmpty()) {
             DBManager.followTable.delete(following.get(0));
         }
     }

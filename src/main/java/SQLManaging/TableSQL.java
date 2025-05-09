@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import ParameterClasses.*;
+import SQLManaging.Parsers.FollowParser;
 import SQLManaging.Parsers.Parser;
 import SQLManaging.Parsers.PostParser;
 
@@ -38,6 +39,7 @@ public class TableSQL<T> implements Table<T>{
 
         System.out.println(sql);
         try (Statement stmt = connection.createStatement()) {
+            System.out.println(stmt);
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
@@ -54,7 +56,6 @@ public class TableSQL<T> implements Table<T>{
         String sql = "INSERT INTO " + tableName + " (" + parser.getColumns() + ") VALUES (" + parser.getPlaceholders() + ")";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             parser.toPreparedStatement(stmt, item);  // Use the parser to set values in the prepared statement
-            System.out.println("here");
             stmt.executeUpdate();  // Execute the insert statement
         } catch (SQLException e) {
             System.out.println("problem with insert");
@@ -79,9 +80,12 @@ public class TableSQL<T> implements Table<T>{
             .collect(Collectors.joining(" AND "));
 
         String sql = "DELETE FROM " + tableName + " WHERE " + whereClause;
+        System.out.println(sql);
 
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            parser.setUniqueIdentifier(stmt, item); // You define this
+            parser.setUniqueIdentifier(stmt, item); 
+            System.out.println(stmt);
+            
             stmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println("problem with delete");
@@ -90,16 +94,24 @@ public class TableSQL<T> implements Table<T>{
 
     public static void main(String[] args) {
         Connection conn = DBManager.init().getConnection();
-        Table<Post> postsTable = new TableSQL<>(conn, "posts", new PostParser());
+        Table<Follow> followTable = new TableSQL<>(conn, "follow", new FollowParser());
+
+        Follow follow = new Follow(18, 30);
+        followTable.delete(follow);
 
         // List<Post> n = postsTable.fetchRows(null);
         // for (Post p : n) {
         //     System.out.println("Found: " + n.toString());
         // }
 
-        Post pipi = new Post(0,30, "img/pics/owl.jpeg", "lalalala", null);
+        // List<Follow> following = DBManager.followTable.fetchRows("follower_id= " + 18 + " AND following_id= " + 10);
 
-        postsTable.insert(pipi);
+        // if (!following.isEmpty()) {
+        //     System.out.println("is following");
+        // }
+        // else{
+        //     System.out.println("not following");
+        // }
     //     TableSQL<User> userTable = new TableSQL<>(conn, "users", new UserParser());
 
     //     // User newUser = new User(0, "alice", "secure123", "Loves cats", "img/users/alice.png");

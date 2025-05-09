@@ -177,6 +177,7 @@ public class InstagramProfileUI extends TemplateUI {
                 followButton.setText("Following");
             } else {
                 InstagramProfileLogic.removeFollower(profileUser);
+                System.out.println("removed");
                 followButton.setText("Follow");
             }
             refreshPanel();

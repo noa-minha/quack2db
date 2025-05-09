@@ -10,7 +10,7 @@ public class Follow {
 
     /**
      * Constructor for following object
-     * @param followerID - the user that follows
+     * @param followerID - the user that 
      * @param followeeID - the user who is being followed
      */
     public Follow(int followerID, int followeeID) {

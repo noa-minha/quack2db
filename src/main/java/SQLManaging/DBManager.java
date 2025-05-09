@@ -37,7 +37,7 @@ public class DBManager {
             userTable = new TableSQL<>(connection, "users", new UserParser());
             postTable = new TableSQL<>(connection, "posts", new PostParser());
             likeTable = new TableSQL<>(connection, "likes", new LikeParser());
-            followTable = new TableSQL<>(connection, "follows", new FollowParser());
+            followTable = new TableSQL<>(connection, "follow", new FollowParser());
             notificationTable = new TableSQL<>(connection, "notifications", new NotificationParser());
             exploreTable = new TableSQL<>(connection, "feed_posts", new PostParser());
             homeTable = new TableSQL<>(connection, "following_posts", new PostParser());
