@@ -8,9 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import ParameterClasses.Notification;
-import SQLManaging.Parsers.NotificationParser;
 import SQLManaging.Parsers.Parser;
 
 // TODO : delete main
@@ -88,13 +85,13 @@ public class TableSQL<T> implements Table<T>{
     }
 
     public static void main(String[] args) {
-        Connection conn = DBManager.init().getConnection();
-        Table<Notification> notificationTable = new TableSQL<>(conn, "notifications", new NotificationParser());
+        // Connection conn = DBManager.init().getConnection();
+        // Table<Notification> notificationTable = new TableSQL<>(conn, "notifications", new NotificationParser());
 
-        List<Notification> n = notificationTable.fetchRows(null);
-        for (Notification noti : n) {
-            System.out.println("Found: " + n.toString());
-        }
+        // List<Notification> n = notificationTable.fetchRows(null);
+        // for (Notification noti : n) {
+        //     System.out.println("Found: " + n.toString());
+        // }
     //     TableSQL<User> userTable = new TableSQL<>(conn, "users", new UserParser());
 
     //     // User newUser = new User(0, "alice", "secure123", "Loves cats", "img/users/alice.png");

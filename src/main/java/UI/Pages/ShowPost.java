@@ -40,8 +40,9 @@ public class ShowPost extends TemplateUI {
      * @see TemplateUI
      */
     public ShowPost(Post post){
-        super();
+        // super();
         this.post = post;
+        System.out.println(post);
     }
 
     /**

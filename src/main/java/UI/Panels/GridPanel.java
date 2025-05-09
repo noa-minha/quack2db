@@ -71,21 +71,21 @@ public class GridPanel extends JPanel {
         for (Post post : posts) {
             if (post != null) {
                 // Create a fixed-size container for each post
+                // System.out.println(post);
                 JPanel postContainer = new JPanel();
                 postContainer.setPreferredSize(new Dimension(90, 90));
                 postContainer.setLayout(new BorderLayout());
+                
 
                 JPanel postPanel = new RegularDisplayedPost(post, 80, 80);
                 postPanel.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(postPanel);
-                        try {
-                            parentFrame.switchPanel(new ShowPost(post));
-                        } catch (Exception e1) {
-                            // TODO Auto-generated catch block
-                            e1.printStackTrace();
-                        }
+                        // System.out.println(postPanel);
+                        // BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(postPanel);
+                        // parentFrame.switchPanel(new ShowPost(post));
+                        System.out.println("Opening post: " + post.getPostID() + ", path: " + post.getImgPath());
+                        ShowPost shPost = new ShowPost(post);
                     }
                 });
 

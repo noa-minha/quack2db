@@ -32,6 +32,7 @@ public class RegularDisplayedPost extends JPanel {
      */
     public RegularDisplayedPost(Post post, int width, int height) {
         this.post = post;
+        // System.out.println(post);
         setPreferredSize(new Dimension(width, height));
         setBackground(Color.LIGHT_GRAY);
 
@@ -39,19 +40,19 @@ public class RegularDisplayedPost extends JPanel {
         loadPostImage(post.getImgPath());
 
         // Add mouse listener to detect clicks on the panel (image area)
-        addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                // Perform action when image is clicked
-                BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(RegularDisplayedPost.this);
-                try {
-                    parentFrame.switchPanel(new ShowPost(post));
-                } catch (Exception e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                }
-            }
-        });
+        // addMouseListener(new MouseAdapter() {
+        //     @Override
+        //     public void mouseClicked(MouseEvent e) {
+        //         // Perform action when image is clicked
+        //         BaseFrame parentFrame = (BaseFrame) SwingUtilities.getWindowAncestor(RegularDisplayedPost.this);
+        //         try {
+        //             parentFrame.switchPanel(new ShowPost(post));
+        //         } catch (Exception e1) {
+        //             // TODO Auto-generated catch block
+        //             e1.printStackTrace();
+        //         }
+        //     }
+        // });
     }
 
     /**
@@ -99,5 +100,10 @@ public class RegularDisplayedPost extends JPanel {
             g.setColor(Color.WHITE);
             g.drawString("Image Not Available", getWidth() / 2 - 50, getHeight() / 2);
         }
+    }
+
+    @Override
+    public String toString() {
+        return post.toString() + "regDis";
     }
 }
