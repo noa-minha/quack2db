@@ -1,7 +1,14 @@
 package UI.Panels;
 
 import javax.swing.*;
+
 import ParameterClasses.Post;
+<<<<<<< HEAD
+=======
+import UI.Pages.ShowPost;
+import UI.BaseFrame;
+
+>>>>>>> aac6dfdd0eace6a1dda0f6fcf3fc3487e3d937e5
 import java.awt.*;
 import java.util.List;
 
@@ -15,10 +22,10 @@ public class GridPanel extends JPanel {
     private boolean hasPosts;
 
     /**
-     * The class is being initialized with the wanted user whos posts are for display
-     * @param user - can be a specific user or null - which means all users
+     * the grid panel is created with popular posts fetched throw a database view
+     * @param posts a list containing all posts to be displayed
      */
-    public GridPanel(List<Post> posts){
+    public GridPanel(List<Post> posts) {
         setLayout(new BorderLayout());
 
         // Use FlowLayout with LEFT alignment to ensure items start from top-left
@@ -35,7 +42,7 @@ public class GridPanel extends JPanel {
         add(scrollPane, BorderLayout.CENTER);
 
         this.posts = posts;
-        
+
         loadPosts();
     }
 
@@ -67,7 +74,6 @@ public class GridPanel extends JPanel {
         for (Post post : posts) {
             if (post != null) {
                 // Create a fixed-size container for each post
-                // System.out.println(post);
                 JPanel postContainer = new JPanel();
                 postContainer.setPreferredSize(new Dimension(90, 90));
                 postContainer.setLayout(new BorderLayout());
@@ -79,9 +85,6 @@ public class GridPanel extends JPanel {
                 hasPosts = true;
             }
         }
-
-
-
 
 
         // Add the grid wrapper to the content panel
@@ -96,6 +99,7 @@ public class GridPanel extends JPanel {
         repaint();
     }
 
+
     @Override
     public void addNotify() {
         super.addNotify();
@@ -103,6 +107,9 @@ public class GridPanel extends JPanel {
         SwingUtilities.invokeLater(this::reloadGrid);
     }
 
+    /**
+     * reloads the page once posts are loaded
+     */
     private void reloadGrid() {
         if (hasPosts) {
             // This forces the grid to recalculate with the actual container width
@@ -112,7 +119,7 @@ public class GridPanel extends JPanel {
 
     /**
      * Message display in case of no posts to show
-      */
+     */
     private void showNoPostsMessage() {
         contentPanel.removeAll();
         JLabel message = new JLabel("No posts available", SwingConstants.CENTER);

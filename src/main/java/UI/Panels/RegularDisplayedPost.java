@@ -15,7 +15,6 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-// Regular post display panel with clickable image
 
 /**
  * RegularDisplayPost is widely used to create JPanels to displayed clickable scaled posts - in grid panels or in the home page
@@ -32,7 +31,6 @@ public class RegularDisplayedPost extends JPanel {
      */
     public RegularDisplayedPost(Post post, int width, int height) {
         this.post = post;
-        // System.out.println(post);
         setPreferredSize(new Dimension(width, height));
         setBackground(Color.LIGHT_GRAY);
 
