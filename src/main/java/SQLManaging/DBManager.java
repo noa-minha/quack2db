@@ -16,6 +16,9 @@ public class DBManager {
     private static String username = "root"; // Your MySQL username
     private static String password = "1234"; // Your MySQL password
 
+    /**
+     * All tables in the schema
+     */
     public static TableSQL<User> userTable;
     public static TableSQL<Post> postTable;
     public static TableSQL<Like> likeTable;
@@ -24,11 +27,19 @@ public class DBManager {
     public static TableSQL<Post> exploreTable;
     public static TableSQL<Post> homeTable;
 
-
-
+    /**
+     * this is a singleton class
+     */
     private static DBManager instance;
+
+    /**
+     * the connection to the MySQL DB
+     */
     private static Connection connection;
 
+    /**
+     * creates the connection and the tables
+     */
     private DBManager(){
         try {
             // Establish connection
@@ -48,6 +59,10 @@ public class DBManager {
         }
     }
 
+    /**
+     * in case an instance does not yet exist - creates it and returnes the instance, else, returns the instance
+     * @return DBManager singleton
+     */
     public static DBManager init() {
         if (instance == null) {
             synchronized (DBManager.class) {
@@ -59,10 +74,16 @@ public class DBManager {
         return instance;
     }
 
+    /** 
+     * @return the connection to the MySQL DB
+     */
     public Connection getConnection() {
         return connection;
     }
 
+    /**
+     * Ends the connection
+     */
     public void terminateConnection(){
         try {
             connection.close();
@@ -71,6 +92,11 @@ public class DBManager {
         }
     }
 
+    /**
+     * Runs saved functions in the schema
+     * @param func - the name of the function, as shown in the schema
+     * @return - the int value the function returns
+     */
     public static int runFunc(String func) {
         String sql = "SELECT " + func;
     

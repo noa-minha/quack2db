@@ -8,27 +8,34 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import ParameterClasses.*;
-import SQLManaging.Parsers.FollowParser;
 import SQLManaging.Parsers.Parser;
-import SQLManaging.Parsers.PostParser;
 
-// TODO : delete main
-// TODO : make these reaise exception and handle it elsewhere
+
 
 public class TableSQL<T> implements Table<T>{
+
     private final Connection connection;
     private final String tableName;
     private final Parser<T> parser;
 
+    /**
+     * Creates a table
+     * @param connection - the DB connection (from DBManager)
+     * @param tableName - schema name as shown in SQL
+     * @param parser - the appropriate parser for the type T of the table
+     */
     public TableSQL(Connection connection, String tableName, Parser<T> parser) {
         this.connection = connection;
         this.tableName = tableName;
         this.parser = parser;
     }
 
-    // Fetch rows based on a WHERE condition (string-based)
+
+    /**
+     * Function that applies a WHERE statement
+     * @param condition - of SQL form
+     * @return a List<T> where T is the type of the table
+     */
     public List<T> fetchRows(String condition) {
         List<T> resultList = new ArrayList<>();
 
@@ -37,13 +44,12 @@ public class TableSQL<T> implements Table<T>{
             sql += " WHERE " + condition;
         }
 
-        System.out.println(sql);
         try (Statement stmt = connection.createStatement()) {
-            System.out.println(stmt);
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                resultList.add(parser.parseRow(rs));  // Using the parser to convert each row into a User object
+                // Using the parser to convert each row into a User object
+                resultList.add(parser.parseRow(rs)); 
             }
         } catch (SQLException e) {
             System.out.println("problem with fetch");
@@ -51,7 +57,9 @@ public class TableSQL<T> implements Table<T>{
         return resultList;
     }
 
-    // Insert a new row (object T) into the table
+    /**
+     * Function that applies an INSERT statement
+     */
     public void insert(T item) {
         String sql = "INSERT INTO " + tableName + " (" + parser.getColumns() + ") VALUES (" + parser.getPlaceholders() + ")";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
@@ -63,6 +71,10 @@ public class TableSQL<T> implements Table<T>{
 
     }
 
+    /**
+     * Function that applies an UPDATE statement
+     * @param setCLuase = an SQL String that is all that follows the "SET" part of the function
+     */
     public void update(String setClause) {
             String sql = "UPDATE " + tableName + " SET " + setClause;
             try (PreparedStatement stmt = connection.prepareStatement(sql)) {
@@ -72,7 +84,10 @@ public class TableSQL<T> implements Table<T>{
             }
     }
 
-    // Delete rows based on a WHERE condition
+
+    /**
+     * Function that applies a DELETE statement
+     */
     public void delete(T item) {
         List<String> keys = parser.getUniqueIdentifierColumns();
         String whereClause = keys.stream()
@@ -80,49 +95,12 @@ public class TableSQL<T> implements Table<T>{
             .collect(Collectors.joining(" AND "));
 
         String sql = "DELETE FROM " + tableName + " WHERE " + whereClause;
-        System.out.println(sql);
 
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            parser.setUniqueIdentifier(stmt, item); 
-            System.out.println(stmt);
-            
+            parser.setUniqueIdentifier(stmt, item);             
             stmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println("problem with delete");
         }
-    }
-
-    public static void main(String[] args) {
-        Connection conn = DBManager.init().getConnection();
-        Table<Follow> followTable = new TableSQL<>(conn, "follow", new FollowParser());
-
-        Follow follow = new Follow(18, 30);
-        followTable.delete(follow);
-
-        // List<Post> n = postsTable.fetchRows(null);
-        // for (Post p : n) {
-        //     System.out.println("Found: " + n.toString());
-        // }
-
-        // List<Follow> following = DBManager.followTable.fetchRows("follower_id= " + 18 + " AND following_id= " + 10);
-
-        // if (!following.isEmpty()) {
-        //     System.out.println("is following");
-        // }
-        // else{
-        //     System.out.println("not following");
-        // }
-    //     TableSQL<User> userTable = new TableSQL<>(conn, "users", new UserParser());
-
-    //     // User newUser = new User(0, "alice", "secure123", "Loves cats", "img/users/alice.png");
-    //     // userTable.insert(newUser);
-
-    //     List<User> foundUsers = userTable.fetchRows("username = 'alice'");
-    //     for (User u : foundUsers) {
-    //         System.out.println("Found: " + u.getUsername());
-    //     }
-
-    //     userTable.delete(foundUsers.get(0));
-
     }
 }

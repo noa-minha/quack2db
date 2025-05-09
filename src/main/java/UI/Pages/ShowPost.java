@@ -154,7 +154,7 @@ public class ShowPost extends TemplateUI {
      */
     private JLabel createTimestampLabel() {
         LocalDateTime postTime = post.getCreatedAt();
-        JLabel timeLabel = new JLabel(ShowPostLogic.calculateTimeSincePosting(postTime));
+        JLabel timeLabel = new JLabel(ShowPostLogic.getTimeSince(postTime));
         timeLabel.setHorizontalAlignment(JLabel.RIGHT);
         return timeLabel;
     }
