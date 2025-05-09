@@ -54,9 +54,4 @@ public class Post {
         }
         return false;
     }
-
-    @Override
-    public String toString() {
-        return postID + ", " + imgPath;
-    }
 }

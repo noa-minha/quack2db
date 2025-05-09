@@ -62,7 +62,6 @@ public class ShowPost extends TemplateUI {
     public void initializeUI() {
         if(post!=null) {
             JPanel mainContentPanel = createMainContentPanel();
-            System.out.println("created main content panel");
             add(mainContentPanel);
             revalidate();
             repaint();

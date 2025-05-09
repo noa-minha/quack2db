@@ -26,13 +26,12 @@ public class SignInLogic{
             throw new Exception("Incorrect password. Please try again.");
         }
 
+        // changes the curr_user to 1 
         String setClause = "curr_user = 1 WHERE username = '" + username + "'";
         DBManager.userTable.update(setClause);
-
-        System.out.println(username + " logged in");
-
         return user.get(0);
     }
+    
 
     /**
      * Verifies user credentials

@@ -49,7 +49,6 @@ public class InstagramProfileUI extends TemplateUI {
 
     /**
      * Returns the name of this UI page for display in the header.
-     *
      * @return the name of this page
      */
     @Override
@@ -125,22 +124,15 @@ public class InstagramProfileUI extends TemplateUI {
     private JPanel createStatsAndButtonsPanel() {
         JPanel statsFollowPanel = new JPanel();
         statsFollowPanel.setLayout(new BoxLayout(statsFollowPanel, BoxLayout.Y_AXIS));
-        System.out.println("1");
 
         // Add stats display
         statsFollowPanel.add(createStatsPanel());
-        System.out.println("2");
-
 
         // Add appropriate action buttons based on user state
         if (InstagramProfileLogic.isLoggedInUser(profileUser)) {
             statsFollowPanel.add(createLogoutButton());
-            System.out.println("3");
-
         } else {
             statsFollowPanel.add(createFollowButton());
-            System.out.println("4");
-
         }
 
         return statsFollowPanel;
@@ -177,7 +169,6 @@ public class InstagramProfileUI extends TemplateUI {
                 followButton.setText("Following");
             } else {
                 InstagramProfileLogic.removeFollower(profileUser);
-                System.out.println("removed");
                 followButton.setText("Follow");
             }
             refreshPanel();

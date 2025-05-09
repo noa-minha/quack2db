@@ -1,6 +1,9 @@
 package ParameterClasses;
-
+/**
+ * An object that represents a like 
+ */
 public class Like {
+    
     private int postID;
     private int userID;
 
