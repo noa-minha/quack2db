@@ -3,12 +3,6 @@ package UI.Panels;
 import javax.swing.*;
 
 import ParameterClasses.Post;
-<<<<<<< HEAD
-=======
-import UI.Pages.ShowPost;
-import UI.BaseFrame;
-
->>>>>>> aac6dfdd0eace6a1dda0f6fcf3fc3487e3d937e5
 import java.awt.*;
 import java.util.List;
 

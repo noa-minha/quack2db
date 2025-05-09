@@ -32,7 +32,6 @@ public class InstagramProfileLogic {
         User loggedInUser = user.get(0);
         List<Follow> following = DBManager.followTable.fetchRows("follower_id= " + loggedInUser.getUserID() + " AND following_id= " + profileUser.getUserID());
         if (!following.isEmpty()) {
-            System.out.println("is following");
             return true;
         }
         return false;
