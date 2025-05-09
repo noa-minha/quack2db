@@ -30,17 +30,23 @@ public interface Parser<T> {
      */
     String getColumns();
 
-    // Returns the placeholders for the INSERT SQL statement (e.g., "?, ?, ?, ?")
     /**
-     * 
+     * returns the placeholders for the insert statement (e.g., "?, ?, ?, ?")
      * @return
      */
     String getPlaceholders();
 
-    // Returns the column name for the unique identifier for DELETE
+    /**
+     * @return the primary key column(s) name(s)
+     */
     public List<String> getUniqueIdentifierColumns();
 
-    // Sets the unique identifier in the PreparedStatement for DELETE
+    /**
+     * sets the primary key cols for the PreparedStmt for DELETE
+     * @param stmt - the SQL statement with placeholders    
+     * @param item - the item to be deleted
+     * @throws SQLException
+     */
     void setUniqueIdentifier(PreparedStatement stmt, T item) throws SQLException;
 
 }
