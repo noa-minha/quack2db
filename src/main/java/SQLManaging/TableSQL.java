@@ -8,7 +8,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import ParameterClasses.*;
+import SQLManaging.Parsers.NotificationParser;
 import SQLManaging.Parsers.Parser;
+import SQLManaging.Parsers.PostParser;
 
 // TODO : delete main
 // TODO : make these reaise exception and handle it elsewhere
@@ -51,6 +55,7 @@ public class TableSQL<T> implements Table<T>{
         String sql = "INSERT INTO " + tableName + " (" + parser.getColumns() + ") VALUES (" + parser.getPlaceholders() + ")";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             parser.toPreparedStatement(stmt, item);  // Use the parser to set values in the prepared statement
+            System.out.println("here");
             stmt.executeUpdate();  // Execute the insert statement
         } catch (SQLException e) {
             System.out.println("problem with insert");
@@ -85,13 +90,17 @@ public class TableSQL<T> implements Table<T>{
     }
 
     public static void main(String[] args) {
-        // Connection conn = DBManager.init().getConnection();
-        // Table<Notification> notificationTable = new TableSQL<>(conn, "notifications", new NotificationParser());
+        Connection conn = DBManager.init().getConnection();
+        Table<Post> postsTable = new TableSQL<>(conn, "posts", new PostParser());
 
-        // List<Notification> n = notificationTable.fetchRows(null);
-        // for (Notification noti : n) {
+        // List<Post> n = postsTable.fetchRows(null);
+        // for (Post p : n) {
         //     System.out.println("Found: " + n.toString());
         // }
+
+        Post pipi = new Post(0,30, "img/pics/owl.jpeg", "lalalala", null);
+
+        postsTable.insert(pipi);
     //     TableSQL<User> userTable = new TableSQL<>(conn, "users", new UserParser());
 
     //     // User newUser = new User(0, "alice", "secure123", "Loves cats", "img/users/alice.png");

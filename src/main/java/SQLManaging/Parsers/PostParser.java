@@ -32,10 +32,9 @@ public class PostParser implements Parser<Post>{
 
     @Override
     public void toPreparedStatement(PreparedStatement stmt, Post post) throws SQLException {
-        stmt.setInt(1, post.getPostID());
-        stmt.setInt(2, post.getUserID());
-        stmt.setString(3, post.getImgPath());
-        stmt.setString(4, post.getCaption());
+        stmt.setInt(1, post.getUserID());
+        stmt.setString(2, post.getImgPath());
+        stmt.setString(3, post.getCaption());
     }
 
     @Override
