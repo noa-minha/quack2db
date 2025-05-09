@@ -6,7 +6,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 import ParameterClasses.Like;
-
+/**
+ * A parser for the Parameter Object Like
+ * see Parser interface for method comments
+ */
 public class LikeParser implements Parser<Like>{
     
     @Override

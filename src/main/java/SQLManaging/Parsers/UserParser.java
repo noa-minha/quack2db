@@ -32,7 +32,6 @@ public class UserParser implements Parser<User>{
         stmt.setString(2, user.getPassword());
         stmt.setString(3, user.getBio());
         stmt.setString(4, user.getProfilePicPath());
-        System.out.println(stmt);
     }
 
     @Override
