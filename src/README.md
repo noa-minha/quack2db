@@ -29,6 +29,7 @@ images with captions.
 ### Database Setup
 
 Quackstagram uses a MySQL database named `quackstagram_db` to store all user, post, like, follow, and notification data.
+SQL integration is under SQL managing
 
 1. **Create the database**  
    Open MySQL Workbench (or your preferred MySQL tool) and run:
